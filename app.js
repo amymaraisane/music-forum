@@ -19,9 +19,31 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/movieResults', (req, res)=>{
+	rp('https://itunes.apple.com/search?term=singerInput&entity=musicTrack/')
+	//note- no semicolons at the end of promise strings
+	//req object returns items of type string. must use JSON.parse to convert to usable object
+	.then((body)=> {
+		let allMovies = JSON.parse(body).results;
+		var movieList = [];
+		allMovies.forEach((movie)=>{
+			movieList += (movie.trackCensoredName);
+		});
+		res.send(movieList);
+	})
+	.catch((err) => {
+	console.log('Error:', err);
+	});
+});
+
 app.post("/postSinger", (req, res)=>{
-	let singerInput = req.body.singer;
-	//in order for this post function to access the variable array, array must be stored globally not in another function
+  let singerInput = req.body.singer;
+  //need a way to detect spaces in name and break into multiple pieces 
+  //then append each piece using "+" 
+  //then append to url 
+
+  //also append "&entity=musicTrack"
+  //how to connect the post requests and turn it into a get request
 	res.send(singerInput);
 	//res.redirect is the key to take the user away from the (necessary) post route back to the page they were originally on
 	//as a reminder, the form has an action attribute which defines where the data will get sent. If action is absent, default in HTML5 is to send data back to the same page you are already on. In our case, the url of the blog page is different than the post route (incl req object) we have set up in our routes list so that is why we have to include action to direct data to the correct route. The method of the form has to be POST, which allows the form to send data when combined with logic in main app file
