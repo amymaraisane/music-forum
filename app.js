@@ -1,39 +1,29 @@
-var createError = require('http-errors');
 var express = require('express');
+var app = express();
+var request = require('request');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var musicRouter = require('./routes/music');
-
-var app = express();
+// var musicRouter = require('./routes/music');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(logger('dev'));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/movieResults', (req, res)=>{
-	rp('https://itunes.apple.com/search?term=singerInput&entity=musicTrack/')
-	//note- no semicolons at the end of promise strings
-	//req object returns items of type string. must use JSON.parse to convert to usable object
-	.then((body)=> {
-		let allMovies = JSON.parse(body).results;
-		var movieList = [];
-		allMovies.forEach((movie)=>{
-			movieList += (movie.trackCensoredName);
-		});
-		res.send(movieList);
-	})
-	.catch((err) => {
-	console.log('Error:', err);
-	});
+/* GET music listing. */
+app.get('/music', function(req, res) {
+  request('https://itunes.apple.com/search?term=bruce+springsteen&entity=song', (error, response, body)=>{
+    if (!error && response.statusCode == 200){
+      var results = JSON.parse(body)
+      res.send(results);
+    }
+  });
 });
 
 app.post("/postSinger", (req, res)=>{
@@ -50,7 +40,7 @@ app.post("/postSinger", (req, res)=>{
 });
 
 app.use('/', indexRouter);
-app.use('/music', musicRouter);
+// app.use('/music', musicRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
