@@ -4,43 +4,33 @@ var request = require('request');
 var path = require('path');
 
 var indexRouter = require('./routes/index');
-// var musicRouter = require('./routes/music');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// app.use(logger('dev'));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* GET music listing. */
-app.get('/music', function(req, res) {
-  request('https://itunes.apple.com/search?term=bruce+springsteen&entity=song', (error, response, body)=>{
+app.get('/musicSearch', function(req, res) {
+  //grabs query string from req the form get method made
+  var singer = req.query.singer;
+  var url = 'https://itunes.apple.com/search?term=' + singer + '&entity=song';
+  request(url, (error, response, body)=>{
     if (!error && response.statusCode == 200){
-      var results = JSON.parse(body)
-      res.send(results);
+      var results = JSON.parse(body).results;
+      res.render('music', {results: results});
     }
   });
 });
 
-app.post("/postSinger", (req, res)=>{
-  let singerInput = req.body.singer;
-  //need a way to detect spaces in name and break into multiple pieces 
-  //then append each piece using "+" 
-  //then append to url 
+  //If action is absent, default in HTML5 is to send data back to the same page you are already on. 
+  //If the get or post request is associated with a different route, include an action to direct data to the correct route. 
 
-  //also append "&entity=musicTrack"
-  //how to connect the post requests and turn it into a get request
-	res.send(singerInput);
-	//res.redirect is the key to take the user away from the (necessary) post route back to the page they were originally on
-	//as a reminder, the form has an action attribute which defines where the data will get sent. If action is absent, default in HTML5 is to send data back to the same page you are already on. In our case, the url of the blog page is different than the post route (incl req object) we have set up in our routes list so that is why we have to include action to direct data to the correct route. The method of the form has to be POST, which allows the form to send data when combined with logic in main app file
-});
 
 app.use('/', indexRouter);
-// app.use('/music', musicRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

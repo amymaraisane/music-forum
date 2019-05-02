@@ -1,7 +1,11 @@
 <h1>Find Songs By:</h1>
 
-<form action="/postSinger" method="POST">
-    <input type="text" name="singer" id= "singer" placeholder="Elton John">
+<form action="/musicSearch" method="GET">
+    <input type="text" name="singer" id= "singer" placeholder="search term">
     <button>Search</button>
 </form>
 
+
+<%results.forEach((result) =>{ %>
+<li><%= result.trackCensoredName %> </li>
+<% }); %>
