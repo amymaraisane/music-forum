@@ -13,6 +13,8 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
+
 /* GET music listing. */
 app.get('/musicSearch', function(req, res) {
   //grabs query string from req the form get method made
@@ -26,11 +28,17 @@ app.get('/musicSearch', function(req, res) {
   });
 });
 
+app.get('/musicDB', (req, res)=>{
+  var albums = [
+    {name: "Invasion Of Privacy", 
+    artist: "Cardi B"},
+    {name: "Thunder Road"}
+  ];
+  res.render('DB');
+})
   //If action is absent, default in HTML5 is to send data back to the same page you are already on. 
   //If the get or post request is associated with a different route, include an action to direct data to the correct route. 
 
-
-app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
