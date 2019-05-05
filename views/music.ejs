@@ -1,6 +1,11 @@
-<h1>Find Songs By Artist Name:</h1>
+<% include partials/header %>
 
-<form action="/musicSearch" method="GET">
+<h1>Find Songs By Artist Name:</h1>
+<a href="/">Home</a> <br>
+
+<a href="/music/forum">Music Forum</a> <br>
+
+<form action="/music/search" method="GET">
     <input type="text" name="singer" id= "singer" placeholder="search term">
     <button>Search</button>
 </form>
@@ -9,3 +14,6 @@
 <%results.forEach((result) =>{ %>
 <li><%= result.trackCensoredName %> </li>
 <% }); %>
+
+
+<% include partials/footer %>

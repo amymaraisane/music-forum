@@ -1,0 +1,28 @@
+<% include partials/header %>
+
+<h1>Albums</h1>
+<a href="/">Home</a> <br>
+
+<a href="/music/search">Search Songs by Artist Name</a> <br>
+<a href="/music/forum/new">New Forum Post</a>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Trending Albums</h3>
+        </div>
+    </div>
+    <div class="row">
+        <% albums.forEach((album)=>{ %>
+            <div class="col-lg-4 col-sm-6 text-center" style="display:flex; flex-wrap:wrap">
+                <div class="thumbnail">
+                    <img src="<%= album.image %>">
+                    <div class="caption">
+                        <h4> <%= album.name %> - <%= album.artist %> </h4>     
+                    </div>
+                </div>
+            </div>
+        <%}) %>
+    </div>
+</div>  
+<% include partials/footer %>
