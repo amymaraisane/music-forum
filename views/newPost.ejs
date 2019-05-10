@@ -1,10 +1,9 @@
 <% include partials/header %>
-<a href="/music/forum">Back to Music Forum</a> <br>
 
 
 <div class="container; display: block">
     <div class="row">
-        <div style="text-align: center; width: 30%; margin: auto"> 
+        <div style="text-align: center; width: 30%; margin: 0 auto"> 
             <h3>Submit a New Album</h3>
             <form action="/music/forum" method="POST">
                 <div>
@@ -16,8 +15,9 @@
                 <div>
                     <input class="form-control" type="text" name="imageURL" placeholder="Album Cover URL">
                 </div> <br>
-                <button class="btn btn-lg btn-primary">Submit</button>
+                <button class="btn btn-lg btn-primary btn-block">Submit</button>
             </form>
+            <a href="/music/forum">Back to Music Forum</a>
         </div>
     </div>
 </div>
