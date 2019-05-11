@@ -3,8 +3,9 @@ var app = express();
 var request = require('request');
 var path = require('path');
 var bodyParser = require('body-parser');
-
 var indexRouter = require('./routes/index');
+var mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost/albums", {useNewUrlParser: true});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,8 +50,8 @@ app.post('/music/forum', (req, res)=>{
   let name = (req.body.newAlbum);
   let artist = (req.body.artist);
   let image = (req.body.imageURL);
-  let newCampground = {name, artist, image};
-  albums.push(newCampground);
+  let newAlbum = {name, artist, image};
+  albums.push(newAlbum);
   res.redirect('/music/forum');
 });
   //If action is absent, default in HTML5 is to send data back to the same page you are already on. 
