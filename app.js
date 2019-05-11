@@ -13,12 +13,13 @@ var albumSchema = new mongoose.Schema({
   image: String
 });
 
-//connect your schema to the available mongoose model properties. use singular capitalized version of model name here to avoid confusion
-//mongoose is smart enough to store collection name as plural and lowercase
+//connect your schema to the available mongoose model properties by saving it as an object. use singular capitalized version of name here to avoid confusion
+//mongoose is smart enough to store collection name as plural and lowercase even though convention says to capitalize it here
 var Album = mongoose.model("Album", albumSchema);
 
 //to add a new item to db, dont need to change the js var name, just the content
 //this var represents a generic new db item
+
 // var brandieCarlile = new Album({
 //   name: "The River",
 //   artist: "Bruce Springsteen"
@@ -27,6 +28,7 @@ var Album = mongoose.model("Album", albumSchema);
 // //double check that mongoose method executed correctly using callback function which will run AFTER method is done 
 // //(.save takes time to execute and check so callback allows for it to finish)
 // //note- schema model param is lowercase even though we initialized it as uppercase
+
 // brandieCarlile.save((err, album)=>{
 //   if(err){
 //     console.log("something went wrong");
@@ -36,22 +38,22 @@ var Album = mongoose.model("Album", albumSchema);
 //   }
 // });
 
-//.create combines the new Album and .save methods into one step
-// Album.create({
-//   name: "Graduation",
-//   artist: "Kanye"
-// }, (err, theProof)=>{
-//   if(err){
-//     console.log("woops");
-//     console.log(err);
-//   } else {
-//     console.log(theProof);
-//   }
-// });
+//.create combines the new Object and .save methods into one step
+Album.create({
+  name: "Graduation",
+  artist: "Kanye"
+}, (err, theProof)=>{
+  if(err){
+    console.log("woops");
+    console.log(err);
+  } else {
+    console.log(theProof);
+  }
+});
 
 
 //this is how to use the .find syntax on the model instance when its written into the program, rather than called in termainal
-//use the capitalized singular model name here not the lowercase plural collection name
+//use the capitalized Object name here not the lowercase plural collection name
 Album.find({}, (err, albumsbutcannameitanything)=>{
   if(err){
     console.log("woops");
