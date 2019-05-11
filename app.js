@@ -13,24 +13,52 @@ var albumSchema = new mongoose.Schema({
   image: String
 });
 
-//now it has all of the methods accessable that we need for mongoose. use singular capitalized version of model name here
+//connect your schema to the available mongoose model properties. use singular capitalized version of model name here to avoid confusion
+//mongoose is smart enough to store collection name as plural and lowercase
 var Album = mongoose.model("Album", albumSchema);
 
 //to add a new item to db, dont need to change the js var name, just the content
-var brandieCarlile = new Album({
-  name: "The River",
-  artist: "Bruce Springsteen"
-})
+//this var represents a generic new db item
+// var brandieCarlile = new Album({
+//   name: "The River",
+//   artist: "Bruce Springsteen"
+// })
 
-//double check that it saved correctly using callback function 
-//(.save takes time to execute and check so callback keeps stack accessible)
-//note- schema model param is lowercase even though we initialized it as uppercase
-brandieCarlile.save((err, album)=>{
+// //double check that mongoose method executed correctly using callback function which will run AFTER method is done 
+// //(.save takes time to execute and check so callback allows for it to finish)
+// //note- schema model param is lowercase even though we initialized it as uppercase
+// brandieCarlile.save((err, album)=>{
+//   if(err){
+//     console.log("something went wrong");
+//   } else{
+//     console.log("album saved to database");
+//     console.log(album);
+//   }
+// });
+
+//.create combines the new Album and .save methods into one step
+// Album.create({
+//   name: "Graduation",
+//   artist: "Kanye"
+// }, (err, theProof)=>{
+//   if(err){
+//     console.log("woops");
+//     console.log(err);
+//   } else {
+//     console.log(theProof);
+//   }
+// });
+
+
+//this is how to use the .find syntax on the model instance when its written into the program, rather than called in termainal
+//use the capitalized singular model name here not the lowercase plural collection name
+Album.find({}, (err, albumsbutcannameitanything)=>{
   if(err){
-    console.log("something went wrong");
+    console.log("woops");
+    console.log(err);
   } else{
-    console.log("album saved to database");
-    console.log(album);
+    console.log("all albums");
+    console.log(albumsbutcannameitanything);
   }
 });
 
