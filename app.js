@@ -7,6 +7,15 @@ var indexRouter = require('./routes/index');
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/albums", {useNewUrlParser: true});
 
+var albumSchema = new mongoose.Schema({
+  name: String,
+  artist: String,
+  image: String
+});
+
+//now it has all of the methods accessable that we need for mongoose. use singular version of model name here
+var Album = mongoose.model("Album", albumSchema);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
