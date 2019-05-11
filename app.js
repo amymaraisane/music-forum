@@ -13,16 +13,18 @@ var albumSchema = new mongoose.Schema({
   image: String
 });
 
-//now it has all of the methods accessable that we need for mongoose. use singular version of model name here
+//now it has all of the methods accessable that we need for mongoose. use singular capitalized version of model name here
 var Album = mongoose.model("Album", albumSchema);
 
+//to add a new item to db, dont need to change the js var name, just the content
 var brandieCarlile = new Album({
-  name: "Brandie Carlile",
-  title: "Brandie Carlile"
+  name: "The River",
+  artist: "Bruce Springsteen"
 })
 
 //double check that it saved correctly using callback function 
 //(.save takes time to execute and check so callback keeps stack accessible)
+//note- schema model param is lowercase even though we initialized it as uppercase
 brandieCarlile.save((err, album)=>{
   if(err){
     console.log("something went wrong");
