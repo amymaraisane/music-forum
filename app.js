@@ -16,6 +16,22 @@ var albumSchema = new mongoose.Schema({
 //now it has all of the methods accessable that we need for mongoose. use singular version of model name here
 var Album = mongoose.model("Album", albumSchema);
 
+var brandieCarlile = new Album({
+  name: "Brandie Carlile",
+  title: "Brandie Carlile"
+})
+
+//double check that it saved correctly using callback function 
+//(.save takes time to execute and check so callback keeps stack accessible)
+brandieCarlile.save((err, album)=>{
+  if(err){
+    console.log("something went wrong");
+  } else{
+    console.log("album saved to database");
+    console.log(album);
+  }
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
