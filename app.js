@@ -101,9 +101,10 @@ app.post('/music', (req, res)=>{
   let name = (req.body.newAlbum);
   let artist = (req.body.artist);
   let image = (req.body.imageURL);
+  let description = (req.body.description);
   //create new object with form data
   //it's working now- if it ever stops, can do {name: name, image: image}
-  let newAlbum = {name, artist, image};
+  let newAlbum = {name, artist, image, description};
   //create a new album and save to db
   Album.create(newAlbum, (err, newlyCreated)=>{
     if (err){
