@@ -55,10 +55,10 @@ var Album = mongoose.model("Album", albumSchema);
 //   }
 // });
 
-
+//root route
 app.use('/', indexRouter);
 
-/* GET music listing. */
+/* GET music listing from itunes API. */
 app.get('/music/Search', function(req, res) {
   //grabs query string from req the form get method made
   var singer = req.query.singer;
@@ -77,8 +77,8 @@ var albums = [
     {name: "The Times They Are a-Changin'", artist: "Bob Dylan", image: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/Bob_Dylan_-_The_Times_They_Are_a-Changin%27.jpg/220px-Bob_Dylan_-_The_Times_They_Are_a-Changin%27.jpg"}
   ];
 
-app.get('/music/forum', (req, res)=>{
-  //get all albums from db, then render file
+//INDEX route- show all albums
+app.get('/music', (req, res)=>{
   Album.find({}, (err, allAlbums)=>{
     if(err){
       console.log(err);
@@ -88,11 +88,13 @@ app.get('/music/forum', (req, res)=>{
   });
 });
 
-app.get('/music/forum/new', (req, res)=>{
+//NEW route - show form to create new album
+app.get('/music/new', (req, res)=>{
   res.render('newPost');
 })
 
-app.post('/music/forum', (req, res)=>{
+//CREATE route - add new album to db
+app.post('/music', (req, res)=>{
   //grab input from form req
   let name = (req.body.newAlbum);
   let artist = (req.body.artist);
@@ -105,7 +107,7 @@ app.post('/music/forum', (req, res)=>{
     if (err){
       console.log(err);
     } else{
-      res.redirect('/music/forum');
+      res.redirect('/music');
     }
   });
 });
