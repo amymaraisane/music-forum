@@ -1,6 +1,14 @@
 <% include partials/header %>
 
-<%= albums.name %>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12, text-center">
+            <h3><%= album.name %></h3>
+            <h4><%= album.artist %></h4>
+            <img src="<%= album.image %>">
+            <h5><%= album.description %></h5>
+    </div>
+</div>  
 
 
 

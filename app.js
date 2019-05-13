@@ -117,12 +117,15 @@ app.post('/music', (req, res)=>{
 //SHOW route- shows one album with all its info
 //because it will be /music/:id, very important that it comes after the predefined routes of same syntax
 app.get('/music/:id', (req, res)=>{
-  Album.find({id: '5cd86a0d535511155515ac6d'}, (err, requestedAlbum)=>{
+  //id comes from the url request
+  var albumID = req.params.id;
+  //ok to use right away below because at this point it is still a string?
+  Album.findById(albumID, (err, foundAlbum)=>{
     if(err){
       console.log(err);
     } else{
-      console.log("i found the album you asked for!");
-      res.render('show', {albums: requestedAlbum});
+      //changed the key name to album since it can be anything and that makes most sense
+      res.render('show', {album: foundAlbum});
     }
   });
 });
