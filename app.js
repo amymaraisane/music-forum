@@ -113,8 +113,9 @@ app.post('/music', (req, res)=>{
   });
 });
 
-app.get('/music/show', (req, res)=>{
-  res.send('yes!');
+//SHOW route- shows one album with all its info
+app.get('/music/5cd86a0d535511155515ac6d', (req, res)=>{
+  res.render('show');
 });
   //If action is absent, default in HTML5 is to send data back to the same page you are already on. 
   //If the get or post request is associated with a different route, include an action to direct data to the correct route. 
