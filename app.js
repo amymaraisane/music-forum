@@ -12,6 +12,7 @@ var express =     require('express'),
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
 app.use(bodyParser.urlencoded({ extended: true }));;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -21,8 +22,11 @@ var albumSchema = new mongoose.Schema({
   name: String,
   artist: String,
   image: String,
-  description: String
+  description: String,
   //option to add validation later to ensure its an html string
+  created: {type: Date, default: Date.now}
+  //will not appear as a form entry, rather will be automatically created going forward
+
 });
 
 //connect schema to the available mongoose model properties by saving it as an object. use singular capitalized version of name here to avoid confusion
@@ -65,6 +69,7 @@ var albums = [
 
 //root route
 app.use('/', indexRouter);
+  //okay for this to also redirect to '/music' if you prefer
 
 //INDEX route- show all albums
 app.get('/music', (req, res)=>{
