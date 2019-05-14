@@ -7,16 +7,16 @@
             <h3>Submit a New Album</h3>
             <form action="/music" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="newAlbum" placeholder="Album Name">
+                    <input class="form-control" type="text" name="album[newAlbum]" placeholder="Album Name">
                 </div>    
                 <div class="form-group">
-                    <input class="form-control" type="text" name="artist" placeholder="Artist">
+                    <input class="form-control" type="text" name="album[artist]" placeholder="Artist">
                 </div>  
                 <div class="form-group">
-                    <input class="form-control" type="text" name="imageURL" placeholder="Album Cover URL">
+                    <input class="form-control" type="text" name="album[imageURL]" placeholder="Album Cover URL">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="description" placeholder="description">
+                    <input class="form-control" type="text" name="album[description]" placeholder="description">
                 </div>
                 <button class="btn btn-lg btn-primary btn-block">Submit</button>
             </form> <br>

@@ -102,14 +102,8 @@ app.get('/music/new', (req, res)=>{
 
 //CREATE route - add new album to db
 app.post('/music', (req, res)=>{
-  //grab input from form req
-  let name = (req.body.newAlbum);
-  let artist = (req.body.artist);
-  let image = (req.body.imageURL);
-  let description = (req.body.description);
-  //create new object with form data
-  //it's working now- if it ever stops, can do {name: name, image: image}
-  let newAlbum = {name, artist, image, description};
+  //grab input from form req object in name
+  let newAlbum = req.body.album
   //create a new album and save to db
   Album.create(newAlbum, (err, newlyCreated)=>{
     if (err){
@@ -119,6 +113,7 @@ app.post('/music', (req, res)=>{
     }
   });
 });
+
 
 //SHOW route- shows one album with all its info
 //because it will be /music/:id, very important that it comes after the predefined routes of same syntax
