@@ -3,20 +3,24 @@
 
 <div class="container; display: block">
     <div class="row">
-        <div style="text-align: center; width: 30%; margin: 0 auto"> 
-            <h3>Submit a New Album</h3>
+        <div style="width: 30%; margin: 0 auto"> 
+            <h3 style="text-align: center">Submit a New Album</h3>
             <form action="/music" method="POST">
                 <div class="form-group">
-                    <input class="form-control" type="text" name="album[newAlbum]" placeholder="Album Name">
+                    <label for="album[newAlbum]">Album Name</label>
+                    <input class="form-control" type="text" name="album[newAlbum]" placeholder="album name">
                 </div>    
                 <div class="form-group">
-                    <input class="form-control" type="text" name="album[artist]" placeholder="Artist">
+                    <label for="album[artist]">Artist</label>
+                    <input class="form-control" type="text" name="album[artist]" placeholder="artist">
                 </div>  
                 <div class="form-group">
-                    <input class="form-control" type="text" name="album[imageURL]" placeholder="Album Cover URL">
+                    <label for="album[imageURL]">Album Cover URL</label>
+                    <input class="form-control" type="text" name="album[imageURL]" placeholder="album cover URL (optional)">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" type="text" name="album[description]" placeholder="description">
+                    <label for="album[about]">About</label>
+                    <textarea class="form-control" name="album[about]" id="" cols="30" rows="10" placeholder="why do you like this album?"></textarea>
                 </div>
                 <button class="btn btn-lg btn-primary btn-block">Submit</button>
             </form> <br>
