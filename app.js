@@ -150,7 +150,7 @@ app.get('/music/:id/edit', (req, res)=>{
 //UPDATE route
 app.put('/music/:id', (req, res)=>{
   //note- could also use a post request but the restful convention is to label it as a put request for clrity
-  res.send('show!');
+  res.send('received your request!');
 });
 
 

@@ -4,7 +4,7 @@
     <div class="row">
         <div style="width: 30%; margin: 0 auto"> 
             <h3 style="text-align: center">Edit <i><strong><%= album.name %></strong></i></h3>
-            <form action="/music/<%=album._id %>?_method=PUT" method="PUT">
+            <form action="/music/<%=album._id %>?_method=PUT" method="POST">
                 <div class="form-group">
                     <label for="album[name]">Album Name</label>
                     <input class="form-control" type="text" name="album[name]" value=" <%= album.name %>">
