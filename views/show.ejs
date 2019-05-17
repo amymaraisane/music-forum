@@ -8,7 +8,7 @@
             <img src="<%= album.image %>">
             <h5><%= album.about %></h5>
             <h5>Added: <%=album.created.toDateString()%></h4>
-        <a href="/music/album._id/edit">Edit Post</a> <br>
+        <a href="/music/<%= album._id %>/edit">Edit Post</a> <br>
         <a href="/music">Back to Albums</a>
     </div>
 </div>  

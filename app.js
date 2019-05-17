@@ -3,9 +3,9 @@ var express =     require('express'),
     request =     require('request'),
     path =        require('path'),
     bodyParser =  require('body-parser'),
+    methodOverride= require('method-override')
     indexRouter = require('./routes/index'),
     mongoose =    require('mongoose');
-
 
 // 'mongodb+srv://user1:kiwi53@cluster0-enwgt.mongodb.net/test?retryWrites=true'
 //user refers to the user for the cluster under Security tab
@@ -19,6 +19,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride("_method"));
 
 //schema setup
 var albumSchema = new mongoose.Schema({
