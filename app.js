@@ -149,8 +149,16 @@ app.get('/music/:id/edit', (req, res)=>{
 
 //UPDATE route
 app.put('/music/:id', (req, res)=>{
-  //note- could also use a post request but the restful convention is to label it as a put request for clrity
-  res.send('received your request!');
+  var albumID = req.params.id;
+  var newData = req.body.album;
+  Album.findByIdAndUpdate(albumID, newData, (err, album)=>{
+    if(err){
+      console.log(err);
+    } else{
+      res.redirect('/music/' + albumID);
+      //typically after creating or updating, redirect to new url dont just show file
+    }
+  });
 });
 
 
