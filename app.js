@@ -123,24 +123,17 @@ app.post('/music', (req, res)=>{
 app.get('/music/:id', (req, res)=>{
   //id comes from the url request
   var albumID = req.params.id;
-  //ok to use right away below because at this point it is still a string?
+  //ok to use without parsing because at this point it is still a string?
   Album.findById(albumID, (err, foundAlbum)=>{
     if(err){
       console.log(err);
     } else{
-      //changed the key name to album since it can be anything and that makes most sense
       res.render('show', {album: foundAlbum});
     }
   });
 });
 
-// app.put('/music/:id', (req, res)=>{
-//   res.render('show');
-// });
-  //If action is absent, default in HTML5 is to send data back to the same page you are already on. 
-  //If the get or post request is associated with a different route, include an action to direct data to the correct route. 
-
-//EDIT
+//EDIT route
 app.get('/music/:id/edit', (req, res)=>{
   var albumID = req.params.id;
   // //ok to use right away below because at this point it is still a string?
@@ -152,6 +145,18 @@ app.get('/music/:id/edit', (req, res)=>{
     }
   });  
 });
+
+//UPDATE route
+app.put('/music/:id', (req, res)=>{
+  //note- could also use a post request but the restful convention is to label it as a put request for clrity
+  res.send('show!');
+});
+
+
+//If action is absent, default in HTML5 is to send data back to the same page you are already on. 
+//If the get or post request is associated with a different route, include an action to direct data to the correct route. 
+
+
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
