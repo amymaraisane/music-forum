@@ -133,18 +133,24 @@ app.get('/music/:id', (req, res)=>{
     }
   });
 });
+
+// app.put('/music/:id', (req, res)=>{
+//   res.render('show');
+// });
   //If action is absent, default in HTML5 is to send data back to the same page you are already on. 
   //If the get or post request is associated with a different route, include an action to direct data to the correct route. 
 
 //EDIT
 app.get('/music/:id/edit', (req, res)=>{
-  // var albumID = req.params.id;
+  var albumID = req.params.id;
   // //ok to use right away below because at this point it is still a string?
-  // Album.findById(albumID, (err, foundAlbum)=>{
-  //   if(err){
-  //     console.log(err);
-  //   } else{
-    res.render('edit');
+  Album.findById(albumID, (err, album)=>{
+    if(err){
+      console.log(err);
+    } else{
+    res.render('edit', ({album: album}));
+    }
+  });  
 });
 
 // catch 404 and forward to error handler
