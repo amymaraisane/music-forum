@@ -59,6 +59,7 @@ var User = mongoose.model("User", userSchema);
 // });
 
 // newUser.save((err, user)=>{
+  ////saves both the newUser AND the album we pushed in as a separate step
 //   if(err){
 //     console.log(err);
 //   } else{
@@ -217,6 +218,6 @@ app.delete('/music/:id', (req, res)=>{
 
 module.exports = app;
 
-// app.listen(3000, () =>{
-// 	console.log('server listening on port 3000');
-// });
+app.listen(3000, () =>{
+	console.log('server listening on port 3000');
+});
