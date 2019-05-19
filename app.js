@@ -26,19 +26,7 @@ app.use(expressSanitizer());
 var Post = require("./models/album");
 // ./ references where current directory
 
-var userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  albums: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Album"
-    }
-  ]
-  //schema must be defined earlier in the code so can reference it when nested
-})
-
-var User = mongoose.model("User", userSchema);
+var User = require("./models/user");
 
 // User.create({
 //   name: "Hai",
