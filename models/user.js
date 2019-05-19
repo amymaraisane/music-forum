@@ -10,6 +10,8 @@ var userSchema = new mongoose.Schema({
       }
     ]
     //schema must be defined or required earlier in the code so file can reference it when called in a nested object
-  })
+});
 
-module.export = mongoose.model("User", userSchema);
+var User= mongoose.model("User", userSchema);
+module.exports = User;
+//ok to return/export more than one thing but in our case there is only one model to export

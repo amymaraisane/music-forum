@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
 
-var Post = require("./models/album");
+var Album = require("./models/album");
 // ./ references where current directory
 
 var User = require("./models/user");
@@ -39,7 +39,7 @@ var User = require("./models/user");
 //easiest to create the user first, then create the album associated with the user but either way it can save to user correctly
 
 // Album.create({
-//   name: "The Times They Are a-Changin'", artist: "Bob Dylan", image: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f1/Bob_Dylan_-_The_Times_They_Are_a-Changin%27.jpg/220px-Bob_Dylan_-_The_Times_They_Are_a-Changin%27.jpg", about: "This album marked the movement of most of a nation"
+//   name: "Ladies of the Canyon", artist: "Joni Mitchell", image: "https://upload.wikimedia.org/wikipedia/en/0/00/Joni_Ladies.jpg", about: "'Circle Game' off of this album is a classic!"
 // }, (err, newAlbum)=>{
 //   if(err){
 //     console.log("new Album did not save correctly", err);
@@ -57,13 +57,13 @@ var User = require("./models/user");
 //   }
 // });
 
-// User.findOne({name: "Hai"}).populate("albums").exec((err, user)=>{
-//   if (err){
-//     console.log(err);
-//   } else {
-//     console.log(user);
-//   }
-// });
+User.findOne({name: "Hai"}).populate("albums").exec((err, user)=>{
+  if (err){
+    console.log(err);
+  } else {
+    console.log(user.albums);
+  }
+});
 
 //option to use .create mongoose method which combines the new Object and .save methods into one step
 // var albums = [
