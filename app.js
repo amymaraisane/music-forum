@@ -7,6 +7,14 @@ var express =       require('express'),
     indexRouter =   require('./routes/index'),
     mongoose =      require('mongoose');
     expressSanitizer=require('express-sanitizer')
+    Album =         require("./models/album");
+    User =          require("./models/user");
+    Comment =       require("./models/comment");
+//  ./ references current directory
+    seedDB  =       require("./seeds");
+
+//runs seedDB right away to delete albums and create more  
+// seedDB();
 
 // 'mongodb+srv://user1:kiwi53@cluster0-enwgt.mongodb.net/test?retryWrites=true'
 //user refers to the user for the cluster under Security tab
@@ -23,10 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
 
-var Album = require("./models/album");
-// ./ references where current directory
-
-var User = require("./models/user");
 
 // User.create({
 //   name: "Hai",
@@ -57,13 +61,13 @@ var User = require("./models/user");
 //   }
 // });
 
-User.findOne({name: "Hai"}).populate("albums").exec((err, user)=>{
-  if (err){
-    console.log(err);
-  } else {
-    console.log(user.albums);
-  }
-});
+// User.findOne({name: "Hai"}).populate("albums").exec((err, user)=>{
+//   if (err){
+//     console.log(err);
+//   } else {
+//     console.log(user.albums);
+//   }
+// });
 
 //option to use .create mongoose method which combines the new Object and .save methods into one step
 // var albums = [
