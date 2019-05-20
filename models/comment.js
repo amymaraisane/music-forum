@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var commentSchema = ({
-    email: String,
-    body: String,
+    text: String,
+    author: String,
 });
 
 var Comment = mongoose.model("Comment", commentSchema);

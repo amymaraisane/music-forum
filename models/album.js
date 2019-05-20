@@ -7,8 +7,9 @@ var albumSchema = new mongoose.Schema({
     about: String,
     //need to add validation later to ensure its an html string to avoid mongoose cast to object ID error
     //i would like the image to also be an anchor tag to go to the show page. need to figure out how to put image if user doesnt inclde one
-    created: {type: Date, default: Date.now}
+    created: {type: Date, default: Date.now},
     //will not appear as a form input, rather will be automatically created when submit button is clicked
+    comment: []
   });
   
   //connect schema to the available mongoose model properties by saving it as an object. use singular capitalized version of name here to avoid confusion
