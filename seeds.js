@@ -17,14 +17,17 @@ function seedDB(){
             console.log(err);
         } else {
             console.log("removed all albums");
-        }
-    });
-    //add a few albums
-    Album.create(data, (err, newAlbum)=>{
-        if(err){
-            console.log("new Album did not save correctly", err);
-        } else{
-            console.log(newAlbum);
+            //add a few albums inside callback to ensure deleteMany always happens first
+            data.forEach((album)=>{
+                //forEach does need the arrow syntax or function word with it, its NOT just a method
+                Album.create(album, (err, newAlbum)=>{
+                    if (err){
+                    console.log("new Album did not save correctly", err);
+                    } else{
+                    console.log("added" + newAlbum.name);
+                    }
+                });
+            });
         }
     });
     //add comments
