@@ -14,7 +14,7 @@ var express =       require('express'),
     seedDB  =       require("./seeds");
 
 //runs seedDB right away to delete albums and create more  
-// seedDB();
+seedDB();
 
 // 'mongodb+srv://user1:kiwi53@cluster0-enwgt.mongodb.net/test?retryWrites=true'
 //user refers to the user for the cluster under Security tab
