@@ -31,16 +31,18 @@ function seedDB(){
                         if (err){
                             console.log("comment failed to save", err);
                         } else { 
-                            console.log(newComment);
-                            // .push(newComment);
-                            // //it's not enough just to create it, we HAVE to push it onto the album's  information in the db 
-                            // //AND resave the entire album with its newly added content
-                            // newAlbum.save( (err, data)=>{
-                            //     if(err){
-                            //         console.log("failed to save album with added comments");
-                            //     }
-                            // });
-                            // console.log("created new comment and pushed/saved to album in db!");
+                            newAlbum.comments.push(newComment);
+                            //ensure that album schema contains instructions on how to reference a comment
+                            //push new comment onto the album's comment array in db 
+                            //save the entire album with its newly added content
+                            newAlbum.save( (err, data)=>{
+                                if(err){
+                                    console.log("failed to save album with added comments");
+                                } else{
+                                    console.log("created new comment and pushed/saved to album in db!");
+                                    console.log(newAlbum.comments);
+                                }
+                            });
                         }
                     });
                     }
