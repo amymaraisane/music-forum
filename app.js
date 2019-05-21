@@ -122,6 +122,7 @@ app.post('/music', (req, res)=>{
 //because it will be /music/:id, very important that it comes after the predefined routes of same syntax
 app.get('/music/:id', (req, res)=>{
   //id comes from the url request
+  //this is called a path parameter
   var albumID = req.params.id;
   //ok to use without parsing because at this point it is still a string?
   Album.findById(albumID).populate("comments").exec((err, foundAlbum)=>{
@@ -131,6 +132,40 @@ app.get('/music/:id', (req, res)=>{
       res.render('show', {album: foundAlbum});
     }
   });
+});
+
+//NEW route
+app.get('/music/:id/comments/new', (req, res)=>{
+  //from button on show page, show ejs template for new campground
+  res.render('newComment');
+})
+
+app.post('/music/:id/comments', (req, res)=>{
+  //grab input from form req object in name
+  let newComment= req.body.comment;
+  let album = req.params.id;
+  newComment.text = req.sanitize(newComment.text);
+  //create a new comment and save to db
+  //do we also have to associate it with the album?
+  //do we have to use .populate to show all comments?
+  Comment.create(newComment, (err, newlyCreated)=>{
+    //create comment, push it onto album comments array in db, save 
+    if (err){
+      console.log("comment not created", err);
+    } else { 
+      //nested so that it only gets added if there is no error in creating comment
+      album.comments.push(newComment);
+      newComment.save( (err, data)=>{
+          if(err){
+              console.log("failed to save album with added comments");
+          } else{
+              console.log("created new comment and pushed/saved to album in db!");
+              console.log(album.comments);
+          }
+      });
+    }
+  });
+  res.redirect('/music/' + album);
 });
 
 //EDIT route
