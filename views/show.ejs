@@ -7,6 +7,9 @@
             <h4><%= album.artist %></h4>
             <img src="<%= album.image %>">
             <h5><%= album.about %></h5>
+            <p><% album.comments.forEach(comment=>{ %>
+                <%= comment.text %>
+                <% }) %></p>
             <h5>Added: <%=album.created.toDateString()%></h4>
         <a class="btn" href="/music/<%= album._id %>/edit">Edit Post</a>
         <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
