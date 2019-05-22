@@ -79,7 +79,7 @@ app.get('/music', (req, res)=>{
     if(err){
       console.log(err);
     } else{
-      res.render('index', {albums: allAlbums});
+      res.render('albums/index', {albums: allAlbums});
     }
   });
 });
@@ -99,7 +99,7 @@ app.get('/music/search', function(req, res) {
 
 //NEW route - show form to create new album
 app.get('/music/new', (req, res)=>{
-  res.render('newPost');
+  res.render('albums/newPost');
 })
 
 //CREATE route - add new album to db
@@ -130,7 +130,7 @@ app.get('/music/:id', (req, res)=>{
     if(err){
       console.log(err);
     } else{
-      res.render('show', {album: foundAlbum});
+      res.render('albums/show', {album: foundAlbum});
     }
   });
 });
@@ -147,7 +147,7 @@ app.get('/music/:id/comments/new', (req, res)=>{
       console.log(err);
     } else {
       console.log(album);
-      res.render('newComment', {album: album});
+      res.render('comments/newComment', {album: album});
     }
   })
   //from button on show page, show ejs template for new campground
@@ -159,7 +159,7 @@ app.post('/music/:id/comments', (req, res)=>{
   //grab input from form req object in name
   let newComment= req.body.comment;
   Album.findById(req.params.id, (err, album)=>{
-  //find the album FIRST
+  //find the album FIRST, req.params refers to the route parameters! :)
     if (err){
       console.log(err);
     } else{
@@ -171,7 +171,6 @@ app.post('/music/:id/comments', (req, res)=>{
         if (err){
           console.log("comment not created", err);
         } else { 
-          //nested so that it only gets added if there is no error in creating comment
           album.comments.push(comment);
           //push the successfully created comment, not the original form data
           //now saving the entire album with its new data wich will include the new comment
@@ -199,7 +198,7 @@ app.get('/music/:id/edit', (req, res)=>{
     if(err){
       console.log(err);
     } else{
-    res.render('edit', ({album: album}));
+    res.render('albums/edit', ({album: album}));
     }
   });  
 });
