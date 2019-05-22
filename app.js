@@ -99,7 +99,7 @@ app.get('/music/search', function(req, res) {
 
 //NEW route - show form to create new album
 app.get('/music/new', (req, res)=>{
-  res.render('albums/newPost');
+  res.render('albums/new');
 })
 
 //CREATE route - add new album to db
@@ -147,7 +147,7 @@ app.get('/music/:id/comments/new', (req, res)=>{
       console.log(err);
     } else {
       console.log(album);
-      res.render('comments/newComment', {album: album});
+      res.render('comments/new', {album: album});
     }
   })
   //from button on show page, show ejs template for new campground
