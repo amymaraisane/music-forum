@@ -11,12 +11,15 @@
                 <% album.comments.forEach(comment=>{ %>
                 <p><strong><%= comment.author%></strong> - <%= comment.text %></p>
                 <% }) %>
-            
-        <a class="btn" href="/music/<%= album._id %>/edit">Edit Post</a>
-        <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
-            <button class="btn btn-primary">Delete Post</button>
-        </form>
-        <a href="/music">Back to Albums</a>
+            <a class="btn btn-primary" href="/music/<%=album._id%>/comments/new">Add a Comment</a> <br> 
+            <a class="btn btn-primary" href="/music">Back to Albums</a>
+        </div>   
+        <div style="float:right">
+                <a href="/music/<%= album._id %>/edit">Edit Post</a>
+                <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
+                    <button class="btn">Delete Post</button>
+                </form>
+        </div>
     </div>
 </div>  
 
