@@ -124,6 +124,7 @@ app.get('/music/:id', (req, res)=>{
   //id comes from the url request
   //this is called a path parameter
   var albumID = req.params.id;
+  console.log(albumID);
   //ok to use without parsing because at this point it is still a string?
   Album.findById(albumID).populate("comments").exec((err, foundAlbum)=>{
     if(err){
@@ -134,16 +135,31 @@ app.get('/music/:id', (req, res)=>{
   });
 });
 
+// ------------------------------------------------
+// COMMENTS ROUTES
+// ------------------------------------------------
+
 //NEW route
 app.get('/music/:id/comments/new', (req, res)=>{
+  Album.findById(req.params.id, (err, album)=>{
+    //this is the step I didn't know we needed. the new template should have access to which album the comment is for
+    if (err){
+      console.log(err);
+    } else {
+      console.log(album);
+      res.render('newComment', {album: album});
+    }
+  })
   //from button on show page, show ejs template for new campground
-  res.render('newComment');
+  
 })
 
+//CREATE route
 app.post('/music/:id/comments', (req, res)=>{
   //grab input from form req object in name
   let newComment= req.body.comment;
-  let album = req.params.id;
+  let album = req.params.album._id;
+  console.log(album);
   newComment.text = req.sanitize(newComment.text);
   //create a new comment and save to db
   //do we also have to associate it with the album?
@@ -154,14 +170,21 @@ app.post('/music/:id/comments', (req, res)=>{
       console.log("comment not created", err);
     } else { 
       //nested so that it only gets added if there is no error in creating comment
-      album.comments.push(newComment);
-      newComment.save( (err, data)=>{
-          if(err){
-              console.log("failed to save album with added comments");
-          } else{
-              console.log("created new comment and pushed/saved to album in db!");
-              console.log(album.comments);
-          }
+      Album.findById(album, (err, foundAlbum)=>{
+        if (err){
+          console.log(err);
+        } else{
+           //in earlier example there was no error callback, consider adding
+          foundAlbum.comments.push(newComment);
+          //now saving the entire album with its new data wich will include the new comment
+          foundAlbum.save((err, data)=>{
+            if (err){
+              console.log(err);
+            } else {
+              console.log(data);
+            }
+          });
+        }
       });
     }
   });
