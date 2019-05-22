@@ -158,26 +158,24 @@ app.get('/music/:id/comments/new', (req, res)=>{
 app.post('/music/:id/comments', (req, res)=>{
   //grab input from form req object in name
   let newComment= req.body.comment;
-  let album = req.params.album._id;
-  console.log(album);
-  newComment.text = req.sanitize(newComment.text);
-  //create a new comment and save to db
-  //do we also have to associate it with the album?
-  //do we have to use .populate to show all comments?
-  Comment.create(newComment, (err, newlyCreated)=>{
-    //create comment, push it onto album comments array in db, save 
+  Album.findById(req.params.id, (err, album)=>{
+  //find the album FIRST
     if (err){
-      console.log("comment not created", err);
-    } else { 
-      //nested so that it only gets added if there is no error in creating comment
-      Album.findById(album, (err, foundAlbum)=>{
+      console.log(err);
+    } else{
+      newComment.text = req.sanitize(newComment.text);
+        //create a new comment and save to db
+        //why dont we have to use .populate to show all comments?
+      Comment.create(newComment, (err, comment)=>{
+        //create comment, push it onto album comments array in db, save 
         if (err){
-          console.log(err);
-        } else{
-           //in earlier example there was no error callback, consider adding
-          foundAlbum.comments.push(newComment);
+          console.log("comment not created", err);
+        } else { 
+          //nested so that it only gets added if there is no error in creating comment
+          album.comments.push(comment);
+          //push the successfully created comment, not the original form data
           //now saving the entire album with its new data wich will include the new comment
-          foundAlbum.save((err, data)=>{
+          album.save((err, data)=>{
             if (err){
               console.log(err);
             } else {
@@ -186,9 +184,11 @@ app.post('/music/:id/comments', (req, res)=>{
           });
         }
       });
+      res.redirect('/music/' + album._id);
+      //added ._id since the .findById method returns the entire album object
+      //why is colt's redirect still nested?
     }
   });
-  res.redirect('/music/' + album);
 });
 
 //EDIT route
