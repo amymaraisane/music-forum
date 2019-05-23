@@ -31,19 +31,15 @@
                     </div>
                 </div>
             </div>
-           <% album.comments.forEach(comment=>{ %>
-            <div class="well" style="width: 50%; margin: 5px auto">    
-                    <div class="row">
-                        <div class="col-md-12">
-                            <span class=pull-left><strong><%= comment.author%></strong></span>    
-                            <span class="pull-right">Date here</span> <br>
-                            <p class="pull-left">
-                                <%= comment.text %>
-                            </p>
-                        </div>    
-                    </div>
-                 <% }) %>  
-            </div>
+            <% album.comments.forEach(comment=>{ %>
+                <div class="well" style="width: 50%; margin: 5px auto">    
+                    <span class=pull-left><strong><%= comment.author%></strong></span>    
+                    <span class="pull-right">Date here</span> <br>
+                    <p class="pull-left">
+                        <%= comment.text %>
+                    </p>
+                </div>    
+            <% }) %>  
         </div>   
     </div>
 </div>  
