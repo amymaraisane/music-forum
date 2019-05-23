@@ -1,26 +1,27 @@
 <% include ../partials/header %>
+<div class="display: flex; justify-content: text-center">
+    <h1>Albums</h1>
+    <a class= "btn" style= "background-color:rgb(47,67,150,.3); color: black" href="/music/new"><i class="fas fa-plus"></i><strong> New Album</strong></a>
+</div>
 
-<h1>Albums</h1>
 
-<a href="/music/search">Search Songs by Artist Name</a> <br>
-<a href="/music/new">New Forum Post</a>
 
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h3>Trending Albums</h3>
+            <h3>Recently Added</h3>
         </div>
     </div>
     <div class="row">
         <% albums.forEach((album)=>{ %>
             <div class="col-lg-4 col-sm-6 text-center" style="display:flex; flex-wrap:wrap">
-                <div class="thumbnail">
-                    <img src="<%= album.image %>">
+                <div class="thumbnail" style="width: 320px">
+                    <img style="width: 300px; height: 300px; margin: 0 auto" src="<%= album.image %>">
                     <div class="caption">
                         <h4> <%= album.name %> - <%= album.artist %> </h4> <br>
                         <p><%-album.about.substring(0, 50) %></p>    
                     </div>
-                    <a href="/music/<%= album._id %>" class="btn btn-info">More Info</a>
+                    <a href="/music/<%= album._id %>" class="btn" style="background-color:rgb(30,82,140,.7); color: white">Go to Forum</a>
                 </div>
             </div>
         <%}) %>

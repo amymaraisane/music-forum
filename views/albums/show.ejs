@@ -8,9 +8,9 @@
                     <h3 style="margin: 0"><%= album.name %></h3></span>
                 </div>
                 <h4>- <%= album.artist %> -</h4>
-                <img src="<%= album.image %>">
-                <div class="thumbnail" style="width: 220px; margin: auto">
-                    <p><%= album.about %></p>
+                <img style="width: 300px; height: 300px" src="<%= album.image %>">
+                <div class="thumbnail" style="width: 300px; margin: auto">
+                    <p><strong>About: </strong><%= album.about %></p>
                     <p style="margin-bottom: 3px"><i>Added: <%=album.created.toDateString()%></i></p>
                 </div>
                 <br>
