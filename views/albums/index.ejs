@@ -1,7 +1,9 @@
 <% include ../partials/header %>
+<div class="display: flex; justify-content: text-center" style="background-color:rgba(2, 43, 88, 0.15); border-bottom: black solid 2px">
+    <h1 style="margin: 0; padding: 6px">Albums</h1>
+</div>
 <div class="display: flex; justify-content: text-center">
-    <h1>Albums</h1>
-    <a class= "btn" style= "background-color:rgb(47,67,150,.3); color: black" href="/music/new"><i class="fas fa-plus"></i><strong> New Album</strong></a>
+    <a class= "btn" style= "background-color:rgb(47,67,150,.3); color: black" href="/music/new"><i class="fas fa-plus"></i><strong> New</strong></a>
 </div>
 
 
@@ -15,7 +17,7 @@
     <div class="row">
         <% albums.forEach((album)=>{ %>
             <div class="col-lg-4 col-sm-6 text-center" style="display:flex; flex-wrap:wrap">
-                <div class="thumbnail" style="width: 320px">
+                <div class="thumbnail" style="width: 320px; background-color:rgba(2, 43, 88, 0.05)">
                     <img style="width: 300px; height: 300px; margin: 0 auto" src="<%= album.image %>">
                     <div class="caption">
                         <h4> <%= album.name %> - <%= album.artist %> </h4> <br>
