@@ -28,9 +28,9 @@
                   <li><a href="/music">Music Forum</a></li>
               </ul> 
               <ul class="nav navbar-nav navbar-right">
-                  <form class="navbar-form navbar-left">
+                  <form class="navbar-form navbar-left" action="/music/search" method="GET">
                       <div class="form-group">
-                          <input type="text" class="form-control" placeholder="search songs by artist">
+                          <input type="text" name="singer" id= "singer" placeholder="search by artist name">
                       </div>
                       <button type="submit" class="btn btn-default">Go</button>
                   </form>

@@ -1,16 +1,15 @@
 <% include partials/header %>
-
-<h1>Find Songs By Artist Name:</h1>
-
-<form action="/music/search" method="GET">
-    <input type="text" name="singer" id= "singer" placeholder="artist name">
-    <button>Search</button>
-</form>
-
-
-<%results.forEach((result) =>{ %>
-<li><%= result.trackCensoredName %> </li>
-<% }); %>
-
+<div class="container">
+    <div class="thumbnail" style="width: 60%; margin: auto">
+        <h1>Find Songs By Artist Name:</h1>
+        <form action="/music/search" method="GET">
+            <input type="text" name="singer" id= "singer" placeholder="artist name">
+            <button>Search</button>
+        </form>
+        <%results.forEach((result) =>{ %>
+        <li><%= result.trackCensoredName %> </li>
+        <% }); %>
+    </div>
+</div>
 
 <% include partials/footer %>

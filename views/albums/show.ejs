@@ -5,9 +5,9 @@
         <div style="background-color:rgba(2, 43, 88, 0.15); padding-top: 10px" class="col-md-3">
             <p class="lead">Album Ranking</p>
             <div class="list-group">
-                <li class="list-group-item">pick me</li>
-                <li class="list-group-item">no me</li>
-                <li class="list-group-item active">meeee</li>
+                <li class="list-group-item">2017</li>
+                <li class="list-group-item">2018</li>
+                <li class="list-group-item active">2019</li>
             </div>
         </div>
         <div class="col-md-9, text-center">
@@ -32,8 +32,8 @@
                 </div>
                 <br>
                 <div class="caption-full">
-                    <p><% album.comments.forEach(comment=>{ %> 
-                    <strong><%= comment.author%></strong> - <%= comment.text %>
+                    <% album.comments.forEach(comment=>{ %> 
+                    <p><strong><%= comment.author%></strong> - <%= comment.text %>
                         <% }) %>
                     </p>
                 </div>
