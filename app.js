@@ -7,6 +7,8 @@ var express =       require('express'),
     indexRouter =   require('./routes/index'),
     mongoose =      require('mongoose');
     expressSanitizer=require('express-sanitizer'),
+    moment =        require('moment'),
+    date =          moment(),
     Album =         require("./models/album");
     User =          require("./models/user");
     Comment =       require("./models/comment");
@@ -17,6 +19,7 @@ var express =       require('express'),
 // 'mongodb+srv://user1:kiwi53@cluster0-enwgt.mongodb.net/test?retryWrites=true'
 //user refers to the user for the cluster under Security tab
 mongoose.connect("mongodb://localhost/albums", {useNewUrlParser: true});
+// moment().format("YYYY, hA");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
