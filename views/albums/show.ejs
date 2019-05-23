@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="col-md-9, text-center">
-            <div class="thumbnail" style="width: 50%; margin: auto">
+            <div class="thumbnail" style="width: 50%; margin: auto; padding: 0; border: solid rgb(0, 0, 0, .4) 2px">
                 <div style="background-color: rgb(47,67,150,.3); height: 4em; display: flex; flex-direction: column; justify-content: center">
                     <h3 style="margin: 0"><%= album.name %></h3></span>
                 </div>
@@ -23,7 +23,7 @@
                 background-repeat:no-repeat;
                 background-size:cover" src="<%= album.image %>">
                 <div class="caption-full">
-                    <p><strong>About: </strong><%= album.about %></p>
+                    <p style="padding-top: 10px"><strong>About: </strong><%= album.about %></p>
                     <div class="row" style="margin: 0">
                         <a class="btn col-xs-12 col-md-4" style="background-color:rgb(30,82,140,.7); color: white" href="/music">Back to Albums</a> 
                         <span class="col-xs-12 col-md-4" style="text-align: center"><i>Added: <%=album.created%></i></span>
@@ -32,12 +32,18 @@
                 </div>
             </div>
             <% album.comments.forEach(comment=>{ %>
-                <div class="well" style="width: 50%; margin: 5px auto">    
-                    <span class=pull-left><strong><%= comment.author%></strong></span>    
-                    <span class="pull-right">Date here</span> <br>
-                    <p class="pull-left">
-                        <%= comment.text %>
-                    </p>
+                <div class="well row" style="width: 50%; margin: 5px auto"> 
+                    <div class="col-xs-12 col-sm-6">
+                        <span class=pull-left><strong><%= comment.author%></strong></span>   
+                    </div>   
+                    <div class="col-xs-12 col-sm-6">
+                        <span class="pull-right">Date here</span> <br>
+                    </div>
+                    <div class="col-xs-12">
+                        <span class="pull-left"> 
+                            <%= comment.text %>
+                        </span>
+                    </div>
                 </div>    
             <% }) %>  
         </div>   
