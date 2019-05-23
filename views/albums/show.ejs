@@ -25,21 +25,25 @@
                 <div class="caption-full">
                     <p><strong>About: </strong><%= album.about %></p>
                     <div class="row" style="margin: 0">
-                        <a class="btn col-xs-12 col-md-4" style="background-color:rgb(47,67,150,.3); color: black" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
-                        <span class="col-xs-12 col-md-4" style="text-align: center"><i>Added: <%=album.created%></i></span>
                         <a class="btn col-xs-12 col-md-4" style="background-color:rgb(30,82,140,.7); color: white" href="/music">Back to Albums</a> 
+                        <span class="col-xs-12 col-md-4" style="text-align: center"><i>Added: <%=album.created%></i></span>
+                        <a class="btn col-xs-12 col-md-4" style="background-color:rgb(47,67,150,.3); color: black" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
                     </div>
                 </div>
-                <br>
-                <div class="caption-full">
-                    <% album.comments.forEach(comment=>{ %> 
-                    <p><strong><%= comment.author%></strong> - <%= comment.text %>
-                        <% }) %>
-                    </p>
-                </div>
-                
             </div>
-           
+           <div class="well" style="width: 50%; margin: 5px auto">
+                <% album.comments.forEach(comment=>{ %> 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span class=pull-left><strong><%= comment.author%></strong></span>    
+                            <span class="pull-right">Date here</span> <br>
+                            <p class="pull-left">
+                                <%= comment.text %>
+                            </p>
+                        </div>    
+                    </div>
+                 <% }) %>  
+            </div>
         </div>   
     </div>
 </div>  
