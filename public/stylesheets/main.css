@@ -1,0 +1,29 @@
+body {
+    background-color:
+}
+
+.pageTitle {
+    background-color:rgba(2, 43, 88, 0.15);
+    border-bottom: rgb(0,0,0) solid 2px;
+}
+
+.pageTitle h1 {
+    margin: 0 auto; 
+    padding: 6px;
+}
+
+.purpleBtn {
+    background-color:rgb(47,67,150,.3); 
+    color: rgb(0,0,0);
+}
+
+/* #albumGridMain {
+    width: 320px; 
+    background-color:rgba(2, 43, 88, 0.05); 
+    box-shadow: 2px 3px rgb(0, 0, 0, .3);
+} */
+
+.blueBtn {
+    background-color:rgb(30,82,140,.7); 
+    color: white;
+}

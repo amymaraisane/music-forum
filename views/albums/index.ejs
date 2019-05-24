@@ -1,9 +1,9 @@
 <% include ../partials/header %>
-<div class="display: flex; justify-content: text-center" style="background-color:rgba(2, 43, 88, 0.15); border-bottom: black solid 2px">
-    <h1 style="margin: 0; padding: 6px">Albums</h1>
+<div class="display: flex; justify-content: text-center; pageTitle">
+    <h1>Albums</h1>
 </div>
 <div class="display: flex; justify-content: text-center">
-    <a class= "btn" style= "background-color:rgb(47,67,150,.3); color: black" href="/music/new"><i class="fas fa-plus"></i><strong> New</strong></a>
+    <a class= "btn purpleBtn" href="/music/new"><i class="fas fa-plus"></i><strong> New</strong></a>
 </div>
 
 
@@ -23,7 +23,7 @@
                         <h4> <%= album.name %> - <%= album.artist %> </h4> <br>
                         <p><%-album.about.substring(0, 50) %></p>    
                     </div>
-                    <a href="/music/<%= album._id %>" class="btn" style="background-color:rgb(30,82,140,.7); color: white">Go to Forum</a>
+                    <a href="/music/<%= album._id %>" class="btn blueBtn">Go to Forum</a>
                 </div>
             </div>
         <%}) %>
