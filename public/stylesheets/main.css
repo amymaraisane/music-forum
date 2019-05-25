@@ -1,8 +1,10 @@
 
 
 .pageTitle {
-    background-color:rgba(2, 43, 88, 0.15);
+    background-color:rgba(150,90,240, .5);
     border-bottom: rgb(0,0,0) solid 2px;
+    justify-content: center; 
+    text-align: center
 }
 
 .pageTitle h1 {
@@ -11,8 +13,8 @@
 }
 
 .purpleBtn {
-    background-color:rgb(47,67,150,.3); 
-    color: rgb(0,0,0);
+    background-color:rgba(150,90,240, .8); 
+    color: rgb(0,0,0,);
 }
 
 /* #albumGridMain {
@@ -22,6 +24,6 @@
 } */
 
 .blueBtn {
-    background-color:rgb(30,82,140,.7); 
+    background-color:rgb(50,221,250); 
     color: white;
 }
