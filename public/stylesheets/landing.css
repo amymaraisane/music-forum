@@ -1,6 +1,5 @@
 body, html {
-    height: 100%;
-    background-color: rgb(0,0,0); 
+    height: 100%; 
 }
 
 * {
@@ -8,27 +7,43 @@ body, html {
 }
 
 .bg-image {
-    background-image: "turntable.jpg"
+    background-image: url(/images/turntable.jpg);
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.welcome, .welcome .container {
+.container {
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,.8);
+    background-color: rgba(0,0,0,.5);
+    border: rgba(250,250,250,.5) 2px solid;
     color: rgb(235,235,235);
     position: absolute;
+    
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 2;
     width: 70%;
+
+    z-index: 2;
     padding: 10px;
     text-align: center;
 }
 
+/*static is the default position value. if you loose it it will not be able to do a z index
+If use Jumbotron class, to align in center of page can use padding-top: 40vh */   
+
+/*see ian's add on for styling the ul and lis correctly 
+to fade IN, images start with an opacity of 0 and fade in to 1*/
+
 .enter {
 
 }
-.purpleBtn {
-    background-color: rgb(250,250,250);
+.enterBtn {
+    background-color: rgba(150,90,240, .5);
     color: rgb(0,0,0);
+    border: 1px solid rgba(0,0,0, .5);
 }
