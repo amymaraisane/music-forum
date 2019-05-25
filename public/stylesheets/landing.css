@@ -59,7 +59,7 @@ to fade IN, images start with an opacity of 0 and fade in to 1*/
     background-repeat: no-repeat;
     opacity: 0;
     z-index: 0;
-    animation: imageAnimation 50s linear; 
+    animation: imageAnimation 40s linear; 
 }
 
 .slideshow li:nth-child(1) { 
@@ -76,10 +76,6 @@ animation-delay: 20s;
 .slideshow li:nth-child(4) { 
 background-image: url(/images/blueTurntable.jpg);
 animation-delay: 30s; 
-}
-.slideshow li:nth-child(5) { 
-background-image: url(/images/pianoKeys.jpg);
-animation-delay: 40s; 
 }
 
 @keyframes imageAnimation { 
