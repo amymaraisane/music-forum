@@ -36,6 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
+//custom middleware to pass user data in to each route
 
 app.use(require('express-session')({
   secret: "Developmental Secret Session",
@@ -50,6 +51,12 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next)=>{
+  res.locals.currentUser = req.user;
+  next();
+});
+//custom middleware to pass user data in to each route
 
 //runs seedDB right away to delete albums and create more  
 seedDB();
@@ -102,7 +109,7 @@ app.get('/music', (req, res)=>{
     if(err){
       console.log(err);
     } else{
-      res.render('albums/index', {albums: allAlbums, currentUser: req.user});
+      res.render('albums/index', {albums: allAlbums});
     }
   });
 });
@@ -328,6 +335,6 @@ function isLoggedIn(req, res, next){
 
 module.exports = app;
 
-app.listen(3000, () =>{
+app.listen(3000, ()=>{
 	console.log('server listening on port 3000');
 });
