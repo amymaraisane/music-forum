@@ -1,6 +1,6 @@
 <% include ../partials/header %>
-<div class="display: flex; justify-content: text-center; pageTitle">
-    <h1 style="margin: 0; padding: 6px; max-width: 615px">Album</h1>
+<div class="display: flex; pageTitle">
+    <h1 style="margin: 0; padding: 6px"><%= album.name %></h1>
 </div>
 
 <div class="container">
@@ -14,17 +14,17 @@
             </div>
         </div>
         <div class="col-md-9, text-center">
-            <div class="thumbnail" style="width: 50%; margin: auto; padding: 0; border: solid rgb(0, 0, 0, .4) 2px">
-                <div style="background-color: rgb(47,67,150,.3); height: 4em; display: flex; flex-direction: column; justify-content: center">
-                    <h3 style="margin: 0"><%= album.name %></h3></span>
+            <div class="thumbnail imgShow">
+                <div class="artist">
+                    <h3 style="margin: 0 auto">- <%= album.artist %> -</h3></span>
                 </div>
-                <h4>- <%= album.artist %> -</h4>
                 <img class="img-responsive" style="width:100%;
                 height:100%;
                 overflow:hidden;
                 background-position:center center;
                 background-repeat:no-repeat;
                 background-size:cover" src="<%= album.image %>">
+
                 <div class="caption-full">
                     <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
                     <div class="row" style="margin: 0">
@@ -34,6 +34,7 @@
                     </div>
                 </div>
             </div>
+
             <% album.comments.forEach(comment=>{ %>
                 <div class="well row" style="width: 50%; margin: 5px auto"> 
                     <div class="col-xs-12 col-sm-6">
@@ -53,12 +54,12 @@
     </div>
 </div>  
 
-  <div style="float:right">
-                <a href="/music/<%= album._id %>/edit">Edit Post</a>
-                <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
-                    <button class="btn">Delete Post</button>
-                </form>
-        </div>
+<div style="float:right">
+    <a href="/music/<%= album._id %>/edit">Edit Post</a>
+    <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
+        <button class="btn">Delete Post</button>
+    </form>
+</div>
 
 
 <% include ../partials/footer %>

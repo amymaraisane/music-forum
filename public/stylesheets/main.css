@@ -17,12 +17,6 @@
     color: rgb(0,0,0,);
 }
 
-/* #albumGridMain {
-    width: 320px; 
-    background-color:rgba(2, 43, 88, 0.05); 
-    box-shadow: 2px 3px rgb(0, 0, 0, .3);
-} */
-
 .blueBtn {
     background-color:rgb(50,221,250); 
     color: white;
@@ -30,4 +24,22 @@
 
 .fa-compact-disc {
     font-size: 2rem;
+}
+
+.imgShow {
+    width: 50%; 
+    margin: auto; 
+    padding: 0; 
+    border: solid rgb(0, 0, 0, .4) 2px;
+}
+
+.imgShow .artist {
+    display: flex; 
+    background-color: rgba(2, 43, 88, 0.15);
+    border-bottom: 2px solid rgb(0,0,0);
+    border-left: 2px solid rgb(0,0,0);
+    border-right: 2px solid rgb(0,0,0);
+    height: 4em; 
+    flex-direction: column; 
+    justify-content: center;
 }
