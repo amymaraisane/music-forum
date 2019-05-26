@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
+var passportLocalMongoose = require('passport-local-mongoose');
 
 var userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
+    username: String,
+    password: String,
     albums: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -12,6 +13,7 @@ var userSchema = new mongoose.Schema({
     //schema must be defined or required earlier in the code so file can reference it when called in a nested object
 });
 
-var User= mongoose.model("User", userSchema);
-module.exports = User;
+userSchema.plugin(passportLocalMongoose);
+
+module.exports = mongoose.model("User", userSchema);
 //ok to return/export more than one thing but in our case there is only one model to export

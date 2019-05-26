@@ -7,6 +7,9 @@ var express =       require('express'),
     indexRouter =   require('./routes/index'),
     mongoose =      require('mongoose');
     expressSanitizer=require('express-sanitizer'),
+    passport        = require('passport');
+    LocalStrategy   = require('passport-local');
+    passportLocalMongoose  = require('passport-local-mongoose');
     moment =        require('moment'),
     date =          moment(),
     Album =         require("./models/album");
@@ -19,12 +22,14 @@ var express =       require('express'),
 // 'mongodb+srv://user1:kiwi53@cluster0-enwgt.mongodb.net/test?retryWrites=true'
 //user refers to the user for the cluster under Security tab
 mongoose.connect("mongodb://localhost/albums", {useNewUrlParser: true});
+mongoose.set('useFindAndModify', false);
+
 // moment().format("YYYY, hA");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-mongoose.set('useFindAndModify', false);
+
 
 app.use(bodyParser.urlencoded({ extended: true }));;
 app.use(express.urlencoded({ extended: false }));
@@ -32,17 +37,32 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
 
+app.use(require('express-session')({
+  secret: "Developmental Secret Session",
+  resave: false,
+  saveUninitialized: false
+  //these are just standard things we need to use with express session
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //runs seedDB right away to delete albums and create more  
 seedDB();
 
 // User.create({
 //   name: "Hai",
-//   email: "bfasdf@asdf"
+//   password: "bfasdf@asdf"
 // }, (err, newUser)=>{
 //   if(err){
 //     console.log(err);
 //   }
 // });
+
 //easiest to create the user first, then create the album associated with the user but either way it can save to user correctly
 
 // Album.create({
@@ -235,6 +255,59 @@ app.delete('/music/:id', (req, res)=>{
     }
   });
 });
+
+//---------------------
+//Login/Register Routes
+//-----------------------
+app.get('/secret', isLoggedIn, (req, res)=>{
+  res.render('secret');
+});
+
+app.get('/register', (req, res)=>{
+  res.render('register');
+});
+
+app.post('/register', (req, res)=>{
+  var newUser = new User({username: req.body.username});
+  //User.register will create a hash for the password and save that in the db along with a salt to unencrypt it
+  User.register(newUser, req.body.password, (err, user)=>{
+      if (err){
+        console.log(err);
+        return res.render('register');
+      }
+      //passport.authenticate runs the serializeUser() method and logs the user in
+      //sign up, get credentials, register the app for fb/twitter
+      passport.authenticate('local')(req, res, ()=>{
+        res.redirect('/music');
+      });
+  });  
+});
+
+app.get('/login', (req, res)=>{
+  res.render('login');
+});
+
+app.post('/login', passport.authenticate('local',{
+  successRedirect: "/secret",
+  failureRedirect: "/login"
+}),(req, res)=>{
+  //check if user is in dbr by passing passport.authenticalte('local) as part of the post req
+  //woohoo!! its a middleware= anything that runs before the final route callback/handler
+});
+
+app.get('/logout', (req, res)=>{
+  req.logout();
+  //passport destroys the user's data in the session
+  res.redirect('/music');
+});
+
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/login'); 
+}
+
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
