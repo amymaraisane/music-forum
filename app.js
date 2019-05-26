@@ -121,12 +121,12 @@ app.get('/music/search', function(req, res) {
 });
 
 //NEW route - show form to create new album
-app.get('/music/new', (req, res)=>{
+app.get('/music/new', isLoggedIn, (req, res)=>{
   res.render('albums/new');
 })
 
 //CREATE route - add new album to db
-app.post('/music', (req, res)=>{
+app.post('/music', isLoggedIn, (req, res)=>{
   //grab input from form req object in name
   let newAlbum = req.body.album;
   newAlbum.about = req.sanitize(newAlbum.about);
@@ -163,22 +163,23 @@ app.get('/music/:id', (req, res)=>{
 // ------------------------------------------------
 
 //NEW route
-app.get('/music/:id/comments/new', (req, res)=>{
+app.get('/music/:id/comments/new', isLoggedIn, (req, res)=>{
   Album.findById(req.params.id, (err, album)=>{
     //this is the step I didn't know we needed. the new template should have access to which album the comment is for
     if (err){
       console.log(err);
     } else {
       console.log(album);
-      res.render('comments/new', {album: album});
+      return res.render('comments/new', {album: album});
     }
-  })
+  });
   //from button on show page, show ejs template for new campground
-  
-})
+  //if isLoggedIn returns not authenticated, user will be redirected to login page
+  //if user is authenticated, login route takes them to album gallery page for all logins currently
+});
 
 //CREATE route
-app.post('/music/:id/comments', (req, res)=>{
+app.post('/music/:id/comments', isLoggedIn, (req, res)=>{
   //grab input from form req object in name
   let newComment= req.body.comment;
   Album.findById(req.params.id, (err, album)=>{
@@ -201,7 +202,7 @@ app.post('/music/:id/comments', (req, res)=>{
             if (err){
               console.log(err);
             } else {
-              console.log(data);
+              console.log("new comment created");
             }
           });
         }
@@ -288,7 +289,7 @@ app.get('/login', (req, res)=>{
 });
 
 app.post('/login', passport.authenticate('local',{
-  successRedirect: "/secret",
+  successRedirect: "/music",
   failureRedirect: "/login"
 }),(req, res)=>{
   //check if user is in dbr by passing passport.authenticalte('local) as part of the post req
