@@ -102,7 +102,7 @@ app.get('/music', (req, res)=>{
     if(err){
       console.log(err);
     } else{
-      res.render('albums/index', {albums: allAlbums});
+      res.render('albums/index', {albums: allAlbums, currentUser: req.user});
     }
   });
 });
@@ -168,9 +168,9 @@ app.get('/music/:id/comments/new', isLoggedIn, (req, res)=>{
     //this is the step I didn't know we needed. the new template should have access to which album the comment is for
     if (err){
       console.log(err);
+      res.redirect('/music/:id/comments');
     } else {
-      console.log(album);
-      return res.render('comments/new', {album: album});
+      res.render('comments/new', {album: album});
     }
   });
   //from button on show page, show ejs template for new campground
