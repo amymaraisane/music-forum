@@ -2,6 +2,7 @@ var express =   require('express');
     router =    express.Router({mergeParams: true});
     Album =     require("../models/album");
     Comment =   require("../models/comment");
+    User =      require("../models/user");
 
 //Comments NEW route
 router.get('/new', isLoggedIn, (req, res)=>{
@@ -36,6 +37,10 @@ router.post('/', isLoggedIn, (req, res)=>{
           if (err){
             console.log("comment not created", err);
           } else { 
+            //add username and id to comment, then save comment
+            comment.author.id = req.user._id;
+            comment.author.username = req.user.username;
+            comment.save();
             album.comments.push(comment);
             //push the successfully created comment, not the original form data
             //now saving the entire album with its new data wich will include the new comment

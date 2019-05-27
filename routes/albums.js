@@ -1,7 +1,7 @@
 var express =   require('express');
     router =    express.Router();
     Album =     require("../models/album");
-
+    User =      require("../models/user");
 
 /* GET music listing from itunes API. */
 router.get('/search', function(req, res) {

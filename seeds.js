@@ -50,4 +50,4 @@ function seedDB(){
     });
 }
 
-    module.exports = seedDB;
+module.exports = seedDB;
