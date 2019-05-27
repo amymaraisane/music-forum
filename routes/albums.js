@@ -37,15 +37,17 @@ router.get('/new', isLoggedIn, (req, res)=>{
 router.post('/', isLoggedIn, (req, res)=>{
     //grab input from form req object in name
     let newAlbum = req.body.album;
+    let author = {
+      id: req.user._id,
+      username: req.user.username
+    }
+    newAlbum.author = author;
     newAlbum.about = req.sanitize(newAlbum.about);
     //create a new album and save to db
     Album.create(newAlbum, (err, album)=>{
         if (err){
         console.log(err);
         } else{
-        album.author.id = req.user._id;
-        album.author.username = req.user.username;
-        album.save();
         res.redirect('/music');
         }
     });

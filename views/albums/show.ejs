@@ -27,10 +27,10 @@
 
                 <div class="caption-full">
                     <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
-                    <p>Added By: <%=album.author.username%></p>
+                    <p>Added By: <%=album.author.username%> on <i><%=album.created%></i></p>
                     <div class="row" style="margin: 0">
                         <a class="btn purpleBtn col-xs-12 col-md-4" id="toAlbums" href="/music">Back to Albums</a> 
-                        <span class="col-xs-12 col-md-4" style="text-align: center"><i>Added: <%=album.created%></i></span>
+                        <span class="col-xs-12 col-md-4" style="text-align: center"></span>
                         <a class="btn blueBtn col-xs-12 col-md-4" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
                     </div>
                 </div>
