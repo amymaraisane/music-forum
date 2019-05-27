@@ -13,40 +13,40 @@ var data = [
 function seedDB(){
     //remove all albums
     Album.deleteMany({}, (err)=>{
-        if (err){
-            console.log(err);
-        } else {
-            console.log("removed all albums");
-            //add a few albums inside callback to ensure deleteMany always happens first
-            data.forEach((album)=>{
-                //forEach does need the arrow syntax or function word with it, its NOT just a method
-                Album.create(album, (err, newAlbum)=>{
-                    if (err){
-                    console.log("new Album did not save correctly", err);
-                    } else{
-                    console.log("added " + newAlbum.name);
-                    Comment.create({text: "Nah, so overrated!", author: "Namdiso"}, (err, newComment)=>{
-                        if (err){
-                            console.log("comment failed to save", err);
-                        } else { 
-                            newAlbum.comments.push(newComment);
-                            //ensure that album schema contains instructions on how to reference a comment
-                            //push new comment onto the album's comment array in db 
-                            //save the entire album with its newly added content
-                            newAlbum.save( (err, data)=>{
-                                if(err){
-                                    console.log("failed to save album with added comments");
-                                } else{
-                                    console.log("created new comment and pushed/saved to album in db!");
-                                    console.log(newAlbum.comments);
-                                }
-                            });
-                        }
-                    });
-                    }
-                });
-            });
-        }
+        // if (err){
+        //     console.log(err);
+        // } else {
+        //     console.log("removed all albums");
+        //     //add a few albums inside callback to ensure deleteMany always happens first
+        //     data.forEach((album)=>{
+        //         //forEach does need the arrow syntax or function word with it, its NOT just a method
+        //         Album.create(album, (err, newAlbum)=>{
+        //             if (err){
+        //             console.log("new Album did not save correctly", err);
+        //             } else{
+        //             console.log("added " + newAlbum.name);
+        //             Comment.create({text: "Nah, so overrated!", author: "Namdiso"}, (err, newComment)=>{
+        //                 if (err){
+        //                     console.log("comment failed to save", err);
+        //                 } else { 
+        //                     newAlbum.comments.push(newComment);
+        //                     //ensure that album schema contains instructions on how to reference a comment
+        //                     //push new comment onto the album's comment array in db 
+        //                     //save the entire album with its newly added content
+        //                     newAlbum.save( (err, data)=>{
+        //                         if(err){
+        //                             console.log("failed to save album with added comments");
+        //                         } else{
+        //                             console.log("created new comment and pushed/saved to album in db!");
+        //                             console.log(newAlbum.comments);
+        //                         }
+        //                     });
+        //                 }
+        //             });
+        //             }
+        //         });
+        //     });
+        // }
     });
 }
 

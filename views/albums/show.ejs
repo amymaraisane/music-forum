@@ -27,6 +27,7 @@
 
                 <div class="caption-full">
                     <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
+                    <p>Added By: <%=album.author.username%></p>
                     <div class="row" style="margin: 0">
                         <a class="btn purpleBtn col-xs-12 col-md-4" id="toAlbums" href="/music">Back to Albums</a> 
                         <span class="col-xs-12 col-md-4" style="text-align: center"><i>Added: <%=album.created%></i></span>

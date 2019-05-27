@@ -21,7 +21,7 @@ var express =       require('express'),
     indexRoutes =   require('./routes/index'),
 
 //  ./ references current directory
-
+    seedDB  =       require("./seeds");
 
 // 'mongodb+srv://user1:kiwi53@cluster0-enwgt.mongodb.net/test?retryWrites=true'
 //user refers to the user for the cluster under Security tab
@@ -68,7 +68,7 @@ app.use("/music", albumRoutes);
 app.use("/music/:id/comments", commentRoutes);
 
 //runs seedDB right away to delete albums and create more  
-// seedDB();
+seedDB();
 
 // User.create({
 //   name: "Hai",

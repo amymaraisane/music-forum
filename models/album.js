@@ -14,7 +14,14 @@ var albumSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Comment"
         }
-    ]
+    ],
+    author: {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+      },
+      username: String
+    }
   });
   
   //connect schema to the available mongoose model properties by saving it as an object. use singular capitalized version of name here to avoid confusion
