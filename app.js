@@ -57,6 +57,7 @@ app.use((req, res, next)=>{
   next();
 });
 //custom middleware to pass user data in to each route
+//must go after passport is set up
 
 //runs seedDB right away to delete albums and create more  
 seedDB();

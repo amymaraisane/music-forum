@@ -14,9 +14,12 @@
 
 .purpleBtn {
     background-color:rgba(150,90,240, .8); 
-    color: rgb(0,0,0,);
+    color: rgb(250,250,250,);
 }
 
+#toAlbums {
+    color: rgb(250,250,250) !important;
+}
 .blueBtn {
     background-color:rgb(50,221,250); 
     color: white;
@@ -42,4 +45,9 @@
     height: 4em; 
     flex-direction: column; 
     justify-content: center;
+}
+
+#usernameNav {
+    color:#9d9d9d;
+    padding: 15px;
 }
