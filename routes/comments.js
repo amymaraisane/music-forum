@@ -1,15 +1,15 @@
 var express =   require('express');
-    router =    express.Router();
+    router =    express.Router({mergeParams: true});
     Album =     require("../models/album");
     Comment =   require("../models/comment");
 
-//NEW route
-router.get('/music/:id/comments/new', isLoggedIn, (req, res)=>{
+//Comments NEW route
+router.get('/new', isLoggedIn, (req, res)=>{
     Album.findById(req.params.id, (err, album)=>{
       //this is the step I didn't know we needed. the new template should have access to which album the comment is for
       if (err){
         console.log(err);
-        res.redirect('/music/:id/comments');
+        res.redirect('/comments');
       } else {
         res.render('comments/new', {album: album});
       }
@@ -19,8 +19,8 @@ router.get('/music/:id/comments/new', isLoggedIn, (req, res)=>{
     //if user is authenticated, login route takes them to album gallery page for all logins currently
 });
   
-  //CREATE route
-router.post('/music/:id/comments', isLoggedIn, (req, res)=>{
+//Comments CREATE route
+router.post('/', isLoggedIn, (req, res)=>{
     //grab input from form req object in name
     let newComment= req.body.comment;
     Album.findById(req.params.id, (err, album)=>{

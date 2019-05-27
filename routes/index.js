@@ -9,9 +9,6 @@ router.get('/', function(req, res, next) {
   res.render('home.ejs');
 });
 
-//---------------------
-//Login/Register Routes
-//-----------------------
 router.get('/register', (req, res)=>{
   res.render('register');
 });

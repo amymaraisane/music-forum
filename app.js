@@ -65,7 +65,7 @@ app.use((req, res, next)=>{
 //must go after passport is set up
 
 app.use("/music", albumRoutes);
-app.use(commentRoutes);
+app.use("/music/:id/comments", commentRoutes);
 app.use(indexRoutes);
 
 //runs seedDB right away to delete albums and create more  

@@ -28,12 +28,12 @@ router.get('/', (req, res)=>{
 });
   
   
-//NEW route - show form to create new album
+//Album NEW route
 router.get('/new', isLoggedIn, (req, res)=>{
     res.render('albums/new');
 })
   
-//CREATE route - add new album to db
+//Album CREATE route
 router.post('/', isLoggedIn, (req, res)=>{
     //grab input from form req object in name
     let newAlbum = req.body.album;
@@ -49,7 +49,7 @@ router.post('/', isLoggedIn, (req, res)=>{
 });
   
   
-//SHOW route- shows one album with all its info
+//Album SHOW route
 //because it will be /music/:id, very important that it comes after the predefined routes of same syntax
 router.get('/:id', (req, res)=>{
     //id comes from the url request
@@ -66,7 +66,7 @@ router.get('/:id', (req, res)=>{
     });
 });
 
-//EDIT route
+//Album EDIT route
 router.get('/:id/edit', (req, res)=>{
     var albumID = req.params.id;
     // //ok to use right away below because at this point it is still a string?
@@ -79,7 +79,7 @@ router.get('/:id/edit', (req, res)=>{
     });  
   });
   
-//UPDATE route
+//Album UPDATE route
 router.put('/:id', (req, res)=>{
     var albumID = req.params.id;
     var newData = req.body.album;
@@ -94,7 +94,7 @@ router.put('/:id', (req, res)=>{
     });
 });
 
-  //DELETE route
+//Album DELETE route
 router.delete('/:id', (req, res)=>{
     //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
     var albumID = req.params.id;
@@ -108,7 +108,6 @@ router.delete('/:id', (req, res)=>{
       }
     });
 });
-  
 
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
