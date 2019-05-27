@@ -18,7 +18,7 @@ var express =       require('express'),
 
     albumRoutes =   require('./routes/albums'),
     commentRoutes =   require('./routes/comments'),
-    authRoutes =   require('./routes/index'),
+    indexRoutes =   require('./routes/index'),
 
 //  ./ references current directory
     seedDB  =       require("./seeds");
@@ -64,9 +64,9 @@ app.use((req, res, next)=>{
 //custom middleware to pass user data in to each route
 //must go after passport is set up
 
-app.use(albumRoutes);
+app.use("/music", albumRoutes);
 app.use(commentRoutes);
-app.use(authRoutes)
+app.use(indexRoutes);
 
 //runs seedDB right away to delete albums and create more  
 seedDB();

@@ -2,13 +2,9 @@ var express =   require('express');
     router =    express.Router();
     Album =     require("../models/album");
 
-/* GET landing page. */
-router.get('/', function(req, res, next) {
-    res.render('home.ejs');
-});
 
 /* GET music listing from itunes API. */
-router.get('/music/search', function(req, res) {
+router.get('/search', function(req, res) {
     //grabs query string from req the form get method made
     var singer = req.query.singer;
     var url = 'https://itunes.apple.com/search?term=' + singer + '&entity=song';
@@ -21,7 +17,7 @@ router.get('/music/search', function(req, res) {
 });
 
 //INDEX route- show all albums
-router.get('/music', (req, res)=>{
+router.get('/', (req, res)=>{
     Album.find({}, (err, allAlbums)=>{
       if(err){
         console.log(err);
@@ -33,12 +29,12 @@ router.get('/music', (req, res)=>{
   
   
 //NEW route - show form to create new album
-router.get('/music/new', isLoggedIn, (req, res)=>{
+router.get('/new', isLoggedIn, (req, res)=>{
     res.render('albums/new');
 })
   
 //CREATE route - add new album to db
-router.post('/music', isLoggedIn, (req, res)=>{
+router.post('/', isLoggedIn, (req, res)=>{
     //grab input from form req object in name
     let newAlbum = req.body.album;
     newAlbum.about = req.sanitize(newAlbum.about);
@@ -55,7 +51,7 @@ router.post('/music', isLoggedIn, (req, res)=>{
   
 //SHOW route- shows one album with all its info
 //because it will be /music/:id, very important that it comes after the predefined routes of same syntax
-router.get('/music/:id', (req, res)=>{
+router.get('/:id', (req, res)=>{
     //id comes from the url request
     //this is called a path parameter
     var albumID = req.params.id;
@@ -69,6 +65,50 @@ router.get('/music/:id', (req, res)=>{
       }
     });
 });
+
+//EDIT route
+router.get('/:id/edit', (req, res)=>{
+    var albumID = req.params.id;
+    // //ok to use right away below because at this point it is still a string?
+    Album.findById(albumID, (err, album)=>{
+      if(err){
+        console.log(err);
+      } else{
+      res.render('albums/edit', ({album: album}));
+      }
+    });  
+  });
+  
+//UPDATE route
+router.put('/:id', (req, res)=>{
+    var albumID = req.params.id;
+    var newData = req.body.album;
+    newData.about = req.sanitize(newData.about);
+    Album.findByIdAndUpdate(albumID, newData, (err, album)=>{
+      if(err){
+        console.log(err);
+      } else{
+        res.redirect('/music/' + albumID);
+        //typically after creating or updating, redirect to new url dont just show file
+      }
+    });
+});
+
+  //DELETE route
+router.delete('/:id', (req, res)=>{
+    //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
+    var albumID = req.params.id;
+    Album.findByIdAndRemove(albumID, err=>{
+    //this time there is NO data to pass into the callback 
+      if(err){
+        console.log(err);
+      } else{
+        res.redirect('/music');
+        //typically after creating or updating, redirect to new url dont just show file
+      }
+    });
+});
+  
 
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
