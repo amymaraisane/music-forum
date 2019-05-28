@@ -95,17 +95,17 @@ router.put('/:id', checkAlbumOwnership, (req, res)=>{
 
 //Album DELETE route
 router.delete('/:id', checkAlbumOwnership, (req, res)=>{
-    //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
-    var albumID = req.params.id;
-    Album.findByIdAndRemove(albumID, err=>{
-    //this time there is NO data to pass into the callback 
-      if(err){
-        console.log(err);
-      } else{
-        res.redirect('/music');
-        //typically after creating or updating, redirect to new url dont just show file
-      }
-    });
+  //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
+  var albumID = req.params.id;
+  Album.findByIdAndRemove(albumID, err=>{
+  //this time there is NO data to pass into the callback 
+    if(err){
+      console.log(err);
+    } else{
+      res.redirect('/music');
+      //typically after creating or updating, redirect to new url dont just show file
+    }
+  });
 });
 
 function isLoggedIn(req, res, next){

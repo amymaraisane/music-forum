@@ -47,15 +47,23 @@
                         </div> 
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6">
-                                <span class="pull-left"> <%= comment.text %></span>
+                        <div style="padding: 15px">
+                            <span class="pull-left"> <%= comment.text %></span>
                         </div>
-                        <% if (currentUser && comment.author.id.equals(currentUser._id)){ %>
-                            <div class="col-xs-12 col-sm-6">
-                                <span class="pull-right"><a class="btn btn-sm blueBtn" href="/music/<%= album._id%>/comments/<%=comment._id %>/edit">Edit Comment</a></span>
-                            </div>                           
-                        <% } %>
                     </div>
+                    <% if (currentUser && comment.author.id.equals(currentUser._id)){ %>
+                        <div class="row" style="padding-top: 10px">
+                            <div class="col-xs-12 col-sm-4">
+                                    <form action="/music/<%= album._id%>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                        <button class="btn btn-sm purpleBtn whiteText">Delete Comment</button>
+                                    </form>
+                            </div>
+                            <div class="col-xs-12 col-sm-4"></div>
+                            <div class="col-xs-12 col-sm-4">
+                                    <a class="btn btn-sm blueBtn" href="/music/<%= album._id%>/comments/<%=comment._id %>/edit">Edit Comment</a>
+                            </div>
+                        </div>                           
+                     <% } %>     
                 </div>
             <% }) %>  
         </div>   
@@ -65,9 +73,9 @@
 <% if(currentUser && album.author.id.equals(currentUser._id)){
     console.log(currentUser) %>
     <div style="float:right">
-        <a href="/music/<%= album._id %>/edit">Edit Post</a>
+        <a class="brn blueBtn" href="/music/<%= album._id %>/edit">Edit Post</a>
         <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
-            <button class="btn">Delete Post</button>
+            <button class="btn purpleBtn">Delete Post</button>
         </form>
     </div>
 <% } %>

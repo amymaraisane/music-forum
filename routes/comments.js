@@ -90,12 +90,8 @@ router.put('/:comment_id', (req, res)=>{
 });
 
 //Comments Delete Route
-router.delete('/:id', (req, res)=>{
-     //id comes from the url request
-    //this is called a path parameter
-  //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
-    //its the second id in the url so not sure if this will work
-  Comment.findByIdAndRemove(req.params.id, err=>{
+router.delete('/:comment_id', (req, res)=>{
+  Comment.findByIdAndRemove(req.params.comment_id, err=>{
   //this time there is NO data to pass into the callback 
     if(err){
       console.log(err);
