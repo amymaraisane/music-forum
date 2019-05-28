@@ -54,10 +54,51 @@ router.post('/', isLoggedIn, (req, res)=>{
           }
         });
         res.redirect('/music/' + album._id);
-        //added ._id since the .findById method returns the entire album object
-        //why is colt's redirect still nested?
       }
     });
+});
+
+//Comments EDIT Route
+router.get('/:comment_id/edit', (req, res)=>{
+  req.params.id = albumID
+  Comment.findById(req.params.comment_id, (err, comment)=>{
+    if (err){
+      console.log(err);
+      res.redirect("back");
+    } else{
+    res.render('comments/edit', ({albumID: albumID}, {comment: comment}));
+    }
+  });  
+});
+
+//Comments UPDATE route
+router.put('/:comment_id', (req, res)=>{
+  data = req.params.comment.text;
+  Comment.findByIdAndUpdate(req.params.comment_id, data, (err, updatedComment)=>{
+    if(err){
+      res.redirect("back");
+    } else{
+      res.redirect("/music/" + req.params.id);
+      //typically after creating or updating, redirect to new url dont just show file
+    }
+  });
+});
+
+//Comments Delete Route
+router.delete('/:id', (req, res)=>{
+     //id comes from the url request
+    //this is called a path parameter
+  //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
+    //its the second id in the url so not sure if this will work
+  Comment.findByIdAndRemove(req.params.id, err=>{
+  //this time there is NO data to pass into the callback 
+    if(err){
+      console.log(err);
+    } else{
+      res.redirect('/');
+      //typically after creating or updating, redirect to new url dont just show file
+    }
+  });
 });
 
 function isLoggedIn(req, res, next){
@@ -65,6 +106,28 @@ function isLoggedIn(req, res, next){
         return next();
     }
     res.redirect('/login'); 
+}
+
+function checkCommentOwnership(req, res, next) {
+  if(req.isAuthenticated()){ 
+    var albumID = req.params.id;
+    Album.findById(albumID, (err, album)=>{
+      if(err || !album){
+        res.redirect("back");
+      } else{
+        //ensure user created the album
+        //once found, album is a mongoose object despite looking like a string when printed
+        //req.user._id is a string. need to use.equals method to check equality
+        if(album.author.id.equals(req.user._id)){
+          next();
+        } else{
+          res.redirect("back");
+        }
+      }
+    });  
+  } else{
+    res.redirect("back");
+  }
 }
 
 module.exports = router;

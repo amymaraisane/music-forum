@@ -68,7 +68,7 @@ app.use("/music", albumRoutes);
 app.use("/music/:id/comments", commentRoutes);
 
 //runs seedDB right away to delete albums and create more  
-seedDB();
+// seedDB();
 
 // User.create({
 //   name: "Hai",
