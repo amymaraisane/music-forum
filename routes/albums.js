@@ -72,27 +72,10 @@ router.get('/:id', (req, res)=>{
 });
 
 //Album EDIT route
-router.get('/:id/edit', (req, res)=>{
-  //ensure user is logged in
-  if(req.isAuthenticated()){ 
-    var albumID = req.params.id;
-    Album.findById(albumID, (err, album)=>{
-      if(err){
-        res.redirect('/');
-      } else{
-        //ensure user created the album
-        //once found, album is a mongoose object despite looking like a string when printed
-        //req.user._id is a string. need to use.equals method to check equality
-        if(album.author.id.equals(req.user._id)){
-          res.render('albums/edit', ({album: album}));
-        } else{
-          res.send("cannot edit albums you did not create");
-        }
-      }
-    });  
-  } else{
-    res.send("Please log in");
-  }
+router.get('/:id/edit', checkAlbumOwnership, (req, res)=>{
+  Album.findById(req.params.id, (err, album)=>{
+    res.render('albums/edit', ({album: album}));
+  });  
 });
   
 //Album UPDATE route
