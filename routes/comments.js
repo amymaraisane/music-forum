@@ -60,18 +60,25 @@ router.post('/', isLoggedIn, (req, res)=>{
 
 //Comments EDIT Route
 router.get('/:comment_id/edit', (req, res)=>{
-  Comment.findById(req.params.comment_id, (err, comment)=>{
+  Album.findById(req.params.id, (err, album)=>{
     if (err){
       res.redirect("back");
     } else{
-      res.render('comments/edit', {album_id: req.params.id, comment: comment});
+      Comment.findById(req.params.comment_id, (err, comment)=>{
+        if (err){
+          res.redirect("back");
+        } else{
+          res.render('comments/edit', {album: album, comment: comment});
+        }
+      });
     }
-  });  
+  }); 
 });
 
 //Comments UPDATE route
 router.put('/:comment_id', (req, res)=>{
-  data = req.params.comment.text;
+  var data = req.body.comment;
+  console.log(data);
   Comment.findByIdAndUpdate(req.params.comment_id, data, (err, updatedComment)=>{
     if(err){
       res.redirect("back");
