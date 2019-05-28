@@ -37,22 +37,24 @@
             </div>
 
             <% album.comments.forEach(comment=>{ %>
-                <div class="well row" style="width: 50%; margin: 5px auto"> 
-                    <div class="col-xs-12 col-sm-6">
-                        <span class=pull-left><strong><%= comment.author.username%></strong></span>   
-                    </div>   
-                    <div class="col-sm-6">
-                        <span class="pull-right">Date here</span> <br>
+                <div class="well row" style="width: 50%; margin: 5px auto">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <span class=pull-left><strong><%= comment.author.username%></strong></span>   
+                        </div>  
+                        <div class="col-xs-12 col-sm-6">
+                            <span class="pull-right">Date here</span>
+                        </div> 
                     </div>
-                    <div class="col-xs-12">
-                        <span class="pull-left"> 
-                            <%= comment.text %>
-                        </span>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                                <span class="pull-left"> <%= comment.text %></span>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <span class="pull-right"><a class="btn btn-sm blueBtn" href="/music/<%= album._id%>/comments/<%=comment._id %>/edit">Edit Comment</a></span>
+                        </div>
                     </div>
                 </div>
-                    <div class="well row">
-                        <a class="btn blueBtn" href="/music/<%= album._id%>/comments/<%=comment._id %>/edit">Edit Comment</a>
-                    </div>   
             <% }) %>  
         </div>   
     </div>
