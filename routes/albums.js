@@ -73,16 +73,27 @@ router.get('/:id', (req, res)=>{
 
 //Album EDIT route
 router.get('/:id/edit', (req, res)=>{
+  //ensure user is logged in
+  if(req.isAuthenticated()){ 
     var albumID = req.params.id;
-    // //ok to use right away below because at this point it is still a string?
     Album.findById(albumID, (err, album)=>{
       if(err){
-        console.log(err);
+        res.redirect('/');
       } else{
-      res.render('albums/edit', ({album: album}));
+        //ensure user created the album
+        //once found, album is a mongoose object despite looking like a string when printed
+        //req.user._id is a string. need to use.equals method to check equality
+        if(album.author.id.equals(req.user._id)){
+          res.render('albums/edit', ({album: album}));
+        } else{
+          res.send("cannot edit albums you did not create");
+        }
       }
     });  
-  });
+  } else{
+    res.send("Please log in");
+  }
+});
   
 //Album UPDATE route
 router.put('/:id', (req, res)=>{
@@ -91,7 +102,7 @@ router.put('/:id', (req, res)=>{
     newData.about = req.sanitize(newData.about);
     Album.findByIdAndUpdate(albumID, newData, (err, album)=>{
       if(err){
-        console.log(err);
+        res.redirect('/');
       } else{
         res.redirect('/music/' + albumID);
         //typically after creating or updating, redirect to new url dont just show file
@@ -119,6 +130,28 @@ function isLoggedIn(req, res, next){
         return next();
     }
     res.redirect('/login'); 
+}
+
+function checkAlbumOwnership(req, res, next) {
+  if(req.isAuthenticated()){ 
+    var albumID = req.params.id;
+    Album.findById(albumID, (err, album)=>{
+      if(err){
+        res.redirect("back");
+      } else{
+        //ensure user created the album
+        //once found, album is a mongoose object despite looking like a string when printed
+        //req.user._id is a string. need to use.equals method to check equality
+        if(album.author.id.equals(req.user._id)){
+          next();
+        } else{
+          res.redirect("back");
+        }
+      }
+    });  
+  } else{
+    res.redirect("back");
+  }
 }
 
 module.exports = router;
