@@ -60,13 +60,11 @@ router.post('/', isLoggedIn, (req, res)=>{
 
 //Comments EDIT Route
 router.get('/:comment_id/edit', (req, res)=>{
-  req.params.id = albumID
   Comment.findById(req.params.comment_id, (err, comment)=>{
     if (err){
-      console.log(err);
       res.redirect("back");
     } else{
-    res.render('comments/edit', ({albumID: albumID}, {comment: comment}));
+      res.render('comments/edit', {album_id: req.params.id, comment: comment});
     }
   });  
 });
