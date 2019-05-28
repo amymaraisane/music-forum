@@ -79,7 +79,7 @@ router.get('/:id/edit', checkAlbumOwnership, (req, res)=>{
 });
   
 //Album UPDATE route
-router.put('/:id', (req, res)=>{
+router.put('/:id', checkAlbumOwnership, (req, res)=>{
     var albumID = req.params.id;
     var newData = req.body.album;
     newData.about = req.sanitize(newData.about);
@@ -94,7 +94,7 @@ router.put('/:id', (req, res)=>{
 });
 
 //Album DELETE route
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', checkAlbumOwnership, (req, res)=>{
     //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
     var albumID = req.params.id;
     Album.findByIdAndRemove(albumID, err=>{
@@ -119,7 +119,7 @@ function checkAlbumOwnership(req, res, next) {
   if(req.isAuthenticated()){ 
     var albumID = req.params.id;
     Album.findById(albumID, (err, album)=>{
-      if(err){
+      if(err || !album){
         res.redirect("back");
       } else{
         //ensure user created the album

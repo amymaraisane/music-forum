@@ -54,12 +54,15 @@
         </div>   
     </div>
 </div>  
-    
-<div style="float:right">
-    <a href="/music/<%= album._id %>/edit">Edit Post</a>
-    <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
-        <button class="btn">Delete Post</button>
-    </form>
-</div>
+
+<% if(currentUser && album.author.id.equals(currentUser._id)){
+    console.log(currentUser) %>
+    <div style="float:right">
+        <a href="/music/<%= album._id %>/edit">Edit Post</a>
+        <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
+            <button class="btn">Delete Post</button>
+        </form>
+    </div>
+<% } %>
 
 <% include ../partials/footer %>
