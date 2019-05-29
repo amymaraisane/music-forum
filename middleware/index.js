@@ -6,7 +6,9 @@ middlewareObj.isLoggedIn = (req, res, next)=>{
     if(req.isAuthenticated()){
         return next();
     }
-    res.redirect('/login'); 
+    req.flash("error", "Please login first");
+    //will not display unless "error" key is called in the route below
+    res.redirect("/login"); 
 }
 
 middlewareObj.checkAlbumOwnership = (req, res, next)=>{

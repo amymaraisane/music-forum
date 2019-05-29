@@ -5,6 +5,7 @@ var express =       require('express'),
     bodyParser =    require('body-parser'),
     methodOverride= require('method-override'),
     mongoose =      require('mongoose');
+    flash =         require('connect-flash');
     expressSanitizer=require('express-sanitizer'),
     passport        = require('passport');
     LocalStrategy   = require('passport-local');
@@ -41,6 +42,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
 //custom middleware to pass user data in to each route
+app.use(flash());
 
 app.use(require('express-session')({
   secret: "Developmental Secret Session",

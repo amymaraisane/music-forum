@@ -73,9 +73,9 @@
 <% if(currentUser && album.author.id.equals(currentUser._id)){
     console.log(currentUser) %>
     <div style="float:right">
-        <a class="brn blueBtn" href="/music/<%= album._id %>/edit">Edit Post</a>
+        <a class="btn blueBtn" href="/music/<%= album._id %>/edit">Edit Post</a>
         <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
-            <button class="btn purpleBtn">Delete Post</button>
+            <button class="btn purpleBtn whiteText">Delete Post</button>
         </form>
     </div>
 <% } %>
