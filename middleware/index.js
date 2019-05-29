@@ -1,4 +1,6 @@
 var middlewareObj = {};
+    Album = ("../models/album");
+    Comment = ("../models/comment");
 
 middlewareObj.isLoggedIn = (req, res, next)=>{
     if(req.isAuthenticated()){
