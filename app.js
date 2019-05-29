@@ -60,6 +60,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next)=>{
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 //custom middleware to pass user data in to each route
