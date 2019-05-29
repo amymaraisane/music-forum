@@ -66,6 +66,7 @@ app.use((req, res, next)=>{
 });
 //custom middleware to pass user data in to each route
 //must go after passport is set up
+//sort of like creating a global variable, but the associated value can be different for each route
 
 app.use(indexRoutes);
 app.use("/music", albumRoutes);
