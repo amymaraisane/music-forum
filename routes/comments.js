@@ -3,9 +3,10 @@ var express =   require('express');
     Album =     require("../models/album");
     Comment =   require("../models/comment");
     User =      require("../models/user");
+    middlewareObj = require("../middleware");
 
 //Comments NEW route
-router.get('/new', isLoggedIn, (req, res)=>{
+router.get('/new', middlewareObj.isLoggedIn, (req, res)=>{
     Album.findById(req.params.id, (err, album)=>{
       //this is the step I didn't know we needed. the new template should have access to which album the comment is for
       if (err){
@@ -21,7 +22,7 @@ router.get('/new', isLoggedIn, (req, res)=>{
 });
   
 //Comments CREATE route
-router.post('/', isLoggedIn, (req, res)=>{
+router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
     //grab input from form req object in name
     let newComment= req.body.comment;
     Album.findById(req.params.id, (err, album)=>{
@@ -59,7 +60,7 @@ router.post('/', isLoggedIn, (req, res)=>{
 });
 
 //Comments EDIT Route
-router.get('/:comment_id/edit', (req, res)=>{
+router.get('/:comment_id/edit', middlewareObj.checkCommentOwnership, (req, res)=>{
   Album.findById(req.params.id, (err, album)=>{
     if (err){
       res.redirect("back");
@@ -76,7 +77,7 @@ router.get('/:comment_id/edit', (req, res)=>{
 });
 
 //Comments UPDATE route
-router.put('/:comment_id', (req, res)=>{
+router.put('/:comment_id', middlewareObj.checkCommentOwnership, (req, res)=>{
   var data = req.body.comment;
   console.log(data);
   Comment.findByIdAndUpdate(req.params.comment_id, data, (err, updatedComment)=>{
@@ -89,46 +90,18 @@ router.put('/:comment_id', (req, res)=>{
   });
 });
 
-//Comments Delete Route
-router.delete('/:comment_id', (req, res)=>{
+//Comments Destroy Route
+router.delete('/:comment_id', middlewareObj.checkCommentOwnership, (req, res)=>{
   Comment.findByIdAndRemove(req.params.comment_id, err=>{
   //this time there is NO data to pass into the callback 
     if(err){
       console.log(err);
+      res.redirect("back")
     } else{
-      res.redirect('/');
+      res.redirect("/music/" + req.params.id);
       //typically after creating or updating, redirect to new url dont just show file
     }
   });
 });
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect('/login'); 
-}
-
-function checkCommentOwnership(req, res, next) {
-  if(req.isAuthenticated()){ 
-    var albumID = req.params.id;
-    Album.findById(albumID, (err, album)=>{
-      if(err || !album){
-        res.redirect("back");
-      } else{
-        //ensure user created the album
-        //once found, album is a mongoose object despite looking like a string when printed
-        //req.user._id is a string. need to use.equals method to check equality
-        if(album.author.id.equals(req.user._id)){
-          next();
-        } else{
-          res.redirect("back");
-        }
-      }
-    });  
-  } else{
-    res.redirect("back");
-  }
-}
 
 module.exports = router;

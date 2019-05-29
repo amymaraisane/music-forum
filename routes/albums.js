@@ -2,6 +2,9 @@ var express =   require('express');
     router =    express.Router();
     Album =     require("../models/album");
     User =      require("../models/user");
+    middlewareObj = require("../middleware");
+    //index file will be available automatically when require the directory
+    //this is a special property of any file named index, it is used to import other files
 
 /* GET music listing from itunes API. */
 router.get('/search', function(req, res) {
@@ -29,12 +32,12 @@ router.get('/', (req, res)=>{
   
   
 //Album NEW route
-router.get('/new', isLoggedIn, (req, res)=>{
+router.get('/new', middlewareObj.isLoggedIn, (req, res)=>{
     res.render('albums/new');
 });
 
 //Album CREATE route
-router.post('/', isLoggedIn, (req, res)=>{
+router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
     //grab input from form req object in name
     let newAlbum = req.body.album;
     let author = {
@@ -72,14 +75,14 @@ router.get('/:id', (req, res)=>{
 });
 
 //Album EDIT route
-router.get('/:id/edit', checkAlbumOwnership, (req, res)=>{
+router.get('/:id/edit', middlewareObj.checkAlbumOwnership, (req, res)=>{
   Album.findById(req.params.id, (err, album)=>{
     res.render('albums/edit', ({album: album}));
   });  
 });
   
 //Album UPDATE route
-router.put('/:id', checkAlbumOwnership, (req, res)=>{
+router.put('/:id', middlewareObj.checkAlbumOwnership, (req, res)=>{
     var albumID = req.params.id;
     var newData = req.body.album;
     newData.about = req.sanitize(newData.about);
@@ -94,7 +97,7 @@ router.put('/:id', checkAlbumOwnership, (req, res)=>{
 });
 
 //Album DELETE route
-router.delete('/:id', checkAlbumOwnership, (req, res)=>{
+router.delete('/:id', middlewareObj.checkAlbumOwnership, (req, res)=>{
   //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
   var albumID = req.params.id;
   Album.findByIdAndRemove(albumID, err=>{
@@ -107,34 +110,5 @@ router.delete('/:id', checkAlbumOwnership, (req, res)=>{
     }
   });
 });
-
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect('/login'); 
-}
-
-function checkAlbumOwnership(req, res, next) {
-  if(req.isAuthenticated()){ 
-    var albumID = req.params.id;
-    Album.findById(albumID, (err, album)=>{
-      if(err || !album){
-        res.redirect("back");
-      } else{
-        //ensure user created the album
-        //once found, album is a mongoose object despite looking like a string when printed
-        //req.user._id is a string. need to use.equals method to check equality
-        if(album.author.id.equals(req.user._id)){
-          next();
-        } else{
-          res.redirect("back");
-        }
-      }
-    });  
-  } else{
-    res.redirect("back");
-  }
-}
 
 module.exports = router;
