@@ -23,7 +23,7 @@ router.get('/search', function(req, res) {
 router.get('/', (req, res)=>{
     Album.find({}, (err, allAlbums)=>{
       if(err){
-        console.log(err);
+        req.flash("error", "This site is experiencing maintenance. Be back soon!");
       } else{
         res.render('albums/index', {albums: allAlbums});
       }
@@ -49,8 +49,9 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
     //create a new album and save to db
     Album.create(newAlbum, (err, album)=>{
         if (err){
-        console.log(err);
+        req.flash("error", "This site is experiencing maintenance. Be back soon!");
         } else{
+        req.flash("success", "Album added!");
         res.redirect('/music');
         }
     });
@@ -67,7 +68,7 @@ router.get('/:id', (req, res)=>{
     //ok to use without parsing because at this point it is still a string?
     Album.findById(albumID).populate("comments").exec((err, foundAlbum)=>{
       if(err){
-        console.log(err);
+        req.flash("error", "This site is experiencing maintenance. Be back soon!");
       } else{
         res.render('albums/show', {album: foundAlbum});
       }
@@ -77,7 +78,12 @@ router.get('/:id', (req, res)=>{
 //Album EDIT route
 router.get('/:id/edit', middlewareObj.checkAlbumOwnership, (req, res)=>{
   Album.findById(req.params.id, (err, album)=>{
-    res.render('albums/edit', ({album: album}));
+    if (err || !album){
+      req.flash("error", "Album not found");
+      res.redirect("back");
+    } else{
+      res.render('albums/edit', ({album: album}));
+    }
   });  
 });
   
@@ -87,26 +93,26 @@ router.put('/:id', middlewareObj.checkAlbumOwnership, (req, res)=>{
     var newData = req.body.album;
     newData.about = req.sanitize(newData.about);
     Album.findByIdAndUpdate(albumID, newData, (err, album)=>{
-      if(err){
+      if(err || !album){
+        req.flash("error", "Album not found");
         res.redirect('/');
       } else{
+        req.flash("success", album + " updated!");
         res.redirect('/music/' + albumID);
-        //typically after creating or updating, redirect to new url dont just show file
       }
     });
 });
 
 //Album DELETE route
 router.delete('/:id', middlewareObj.checkAlbumOwnership, (req, res)=>{
-  //the link to this route has to come from the action of a FORM since its a post request. a tag wont work. 
   var albumID = req.params.id;
   Album.findByIdAndRemove(albumID, err=>{
   //this time there is NO data to pass into the callback 
     if(err){
-      console.log(err);
+      req.flash("error", "You cannot delete this album");
     } else{
+      req.flash("success", "Album deleted");
       res.redirect('/music');
-      //typically after creating or updating, redirect to new url dont just show file
     }
   });
 });

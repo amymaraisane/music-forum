@@ -6,7 +6,7 @@ middlewareObj.isLoggedIn = (req, res, next)=>{
     if(req.isAuthenticated()){
         return next();
     }
-    req.flash("error", "Please login first");
+    req.flash("error", "You need to be logged in to do that");
     //will not display unless "error" key is called in the route below
     res.redirect("/login"); 
 }
@@ -16,6 +16,7 @@ middlewareObj.checkAlbumOwnership = (req, res, next)=>{
         var albumID = req.params.id;
         Album.findById(albumID, (err, album)=>{
         if(err || !album){
+            req.flash("error", "Album not found");
             res.redirect("back");
         } else{
             //ensure user created the album
@@ -24,11 +25,13 @@ middlewareObj.checkAlbumOwnership = (req, res, next)=>{
             if(album.author.id.equals(req.user._id)){
             next();
             } else{
+            req.flash("error", "You don't have permission to do that");
             res.redirect("back");
             }
         }
         });  
     } else{
+        req.flash("error", "You need to be logged in to do that");
         res.redirect("back");
     }
 }
@@ -38,6 +41,7 @@ middlewareObj.checkCommentOwnership = (req, res, next)=>{
       var commentID = req.params.comment_id;
       Comment.findById(commentID, (err, comment)=>{
         if(err || !comment){
+          req.flash("error", "Comment not found");
           res.redirect("back");
         } else{
           //ensure user created the album
@@ -46,11 +50,13 @@ middlewareObj.checkCommentOwnership = (req, res, next)=>{
           if(comment.author.id.equals(req.user._id)){
             next();
           } else{
+            req.flash("error", "You don't have permission to do that");
             res.redirect("back");
           }
         }
       });  
     } else{
+      req.flash("error", "You need to be logged in to do that");
       res.redirect("back");
     }
 }

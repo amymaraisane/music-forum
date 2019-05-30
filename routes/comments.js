@@ -10,7 +10,7 @@ router.get('/new', middlewareObj.isLoggedIn, (req, res)=>{
     Album.findById(req.params.id, (err, album)=>{
       //this is the step I didn't know we needed. the new template should have access to which album the comment is for
       if (err){
-        console.log(err);
+        req.flash("error", "This site is experiencing maintenance. Be back soon!");
         res.redirect('/comments');
       } else {
         res.render('comments/new', {album: album});
@@ -27,8 +27,8 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
     let newComment= req.body.comment;
     Album.findById(req.params.id, (err, album)=>{
     //find the album FIRST, req.params refers to the route parameters! :)
-      if (err){
-        console.log(err);
+      if (err || !album){
+        req.flash("error", "Album not found");
       } else{
         newComment.text = req.sanitize(newComment.text);
           //create a new comment and save to db
@@ -36,7 +36,7 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
         Comment.create(newComment, (err, comment)=>{
           //create comment, push it onto album comments array in db, save 
           if (err){
-            console.log("comment not created", err);
+            req.flash("error", "This site is experiencing maintenance. Be back soon!");
           } else { 
             //add username and id to comment, then save comment
             comment.author.id = req.user._id;
@@ -47,13 +47,12 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
             //now saving the entire album with its new data wich will include the new comment
             album.save((err, data)=>{
               if (err){
-                console.log(err);
-              } else {
-                console.log("new comment created");
+                req.flash("error", "This site is experiencing maintenance. Be back soon!");
               }
             });
           }
         });
+        req.flash("success", "Comment added!");
         res.redirect('/music/' + album._id);
       }
     });
@@ -62,11 +61,13 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
 //Comments EDIT Route
 router.get('/:comment_id/edit', middlewareObj.checkCommentOwnership, (req, res)=>{
   Album.findById(req.params.id, (err, album)=>{
-    if (err){
+    if (err || !album){
+      req.flash("error", "Album not found");
       res.redirect("back");
     } else{
       Comment.findById(req.params.comment_id, (err, comment)=>{
-        if (err){
+        if (err || !comment){
+          req.flash("error", "Comment not found");
           res.redirect("back");
         } else{
           res.render('comments/edit', {album: album, comment: comment});
@@ -81,9 +82,11 @@ router.put('/:comment_id', middlewareObj.checkCommentOwnership, (req, res)=>{
   var data = req.body.comment;
   console.log(data);
   Comment.findByIdAndUpdate(req.params.comment_id, data, (err, updatedComment)=>{
-    if(err){
+    if(err || !comment){
+      req.flash("error", "This site is experiencing maintenance. Be back soon!");
       res.redirect("back");
     } else{
+      req.flash("success", "Comment updated!");
       res.redirect("/music/" + req.params.id);
       //typically after creating or updating, redirect to new url dont just show file
     }
@@ -94,10 +97,11 @@ router.put('/:comment_id', middlewareObj.checkCommentOwnership, (req, res)=>{
 router.delete('/:comment_id', middlewareObj.checkCommentOwnership, (req, res)=>{
   Comment.findByIdAndRemove(req.params.comment_id, err=>{
   //this time there is NO data to pass into the callback 
-    if(err){
-      console.log(err);
-      res.redirect("back")
+    if (err){
+      req.flash("error", "This site is experiencing maintenance. Be back soon!");
+      res.redirect("back");
     } else{
+      req.flash("success", "Comment deleted!");
       res.redirect("/music/" + req.params.id);
       //typically after creating or updating, redirect to new url dont just show file
     }

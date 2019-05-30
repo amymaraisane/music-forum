@@ -1,12 +1,19 @@
 <% include ./partials/header %>
 
+<div class="container" style="margin-top: 20px">
+    <div class="thumbnail" style="width: 30%; margin: 0 auto; text-align: center; border: 2px solid rgb(0,0,0)">
+        <form action="/login" method="POST">
+            <h1>Login</h1>
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="username">
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="password">
+            <input class="btn purpleBtn" type="submit" value="Login">
+        </form>
 
-<form action="/login" method="POST">
-    <label for="username">Username</label>
-    <input type="text" name="username" placeholder="username">
-    <label for="password">Password</label>
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Login">
-</form>
+        <h3>Or</h3>
+        <a class="btn blueBtn whiteText" href="/register">Sign Up</a>
+    </div>
+</div>
 
 <% include ./partials/footer %>
