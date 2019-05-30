@@ -69,22 +69,14 @@ router.get('/:id', (req, res)=>{
       if(err || !foundAlbum){
         req.flash("error", "Sorry, that album does not exist!");
         return res.redirect('/music');
-      } else{
-        res.render('albums/show', {album: foundAlbum});
       }
+      res.render('albums/show', {album: foundAlbum});
     });
 });
 
 //Album EDIT route
-router.get('/:id/edit', middlewareObj.checkAlbumOwnership, (req, res)=>{
-  Album.findById(req.params.id, (err, album)=>{
-    if (err || !album){
-      req.flash("error", "Album not found");
-      res.redirect("back");
-    } else{
-      res.render('albums/edit', ({album: album}));
-    }
-  });  
+router.get('/:id/edit', middlewareObj.isLoggedIn, middlewareObj.checkAlbumOwnership, (req, res)=>{
+  res.render('albums/edit', ({album: album})); 
 });
   
 //Album UPDATE route

@@ -59,7 +59,7 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
 });
 
 //Comments EDIT Route
-router.get('/:comment_id/edit', middlewareObj.checkCommentOwnership, (req, res)=>{
+router.get('/:comment_id/edit', middlewareObj.isLoggedIn, middlewareObj.checkCommentOwnership, (req, res)=>{
   Album.findById(req.params.id, (err, album)=>{
     if (err || !album){
       req.flash("error", "Album not found");
