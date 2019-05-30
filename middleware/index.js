@@ -17,16 +17,17 @@ middlewareObj.checkAlbumOwnership = (req, res, next)=>{
         Album.findById(albumID, (err, album)=>{
         if(err || !album){
             req.flash("error", "Album not found");
-            res.redirect("back");
+            res.redirect("/music");
         } else{
             //ensure user created the album
             //once found, album is a mongoose object despite looking like a string when printed
             //req.user._id is a string. need to use.equals method to check equality
-            if(album.author.id.equals(req.user._id)){
+            if(album.author.id.equals(req.user._id) || req.user.isAdmin){
+            req.album = album;
             next();
             } else{
             req.flash("error", "You don't have permission to do that");
-            res.redirect("back");
+            res.redirect("/albums/" + req.params.albumID);
             }
         }
         });  
@@ -42,19 +43,17 @@ middlewareObj.checkCommentOwnership = (req, res, next)=>{
       Comment.findById(commentID, (err, comment)=>{
         if(err || !comment){
           req.flash("error", "Comment not found");
-          res.redirect("back");
-        } else{
+          res.redirect("/music");
+        } else if(comment.author.id.equals(req.user._id) || req.user.isAdmin){
+            next();
           //ensure user created the album
           //once found, album is a mongoose object despite looking like a string when printed
           //req.user._id is a string. need to use.equals method to check equality
-          if(comment.author.id.equals(req.user._id)){
-            next();
           } else{
             req.flash("error", "You don't have permission to do that");
             res.redirect("back");
           }
-        }
-      });  
+        });  
     } else{
       req.flash("error", "You need to be logged in to do that");
       res.redirect("back");

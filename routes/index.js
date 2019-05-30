@@ -19,12 +19,13 @@ router.post('/register', (req, res)=>{
   var newUser = new User({username: req.body.username});
   //User.register will create a hash for the password and save that in the db along with a salt to unencrypt it
   User.register(newUser, req.body.password, (err, user)=>{
-      if (err){
-        console.log(err);
-        return res.render('register');
+      if (err || !user){
+        req.flash("error", err.message);
+        return res.redirect('/register');
       }
       //passport.authenticate runs the serializeUser() method and logs the user in
       //sign up, get credentials, register the app for fb/twitter
+      req.flash("success", "Welcome," + user.username + " !");
       passport.authenticate('local')(req, res, ()=>{
         res.redirect('/music');
       });

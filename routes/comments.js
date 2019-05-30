@@ -50,10 +50,10 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
                 req.flash("error", "This site is experiencing maintenance. Be back soon!");
               }
             });
+            req.flash("success", "Comment added!");
+            res.redirect('/music/' + album._id);
           }
         });
-        req.flash("success", "Comment added!");
-        res.redirect('/music/' + album._id);
       }
     });
 });
@@ -82,7 +82,7 @@ router.put('/:comment_id', middlewareObj.checkCommentOwnership, (req, res)=>{
   var data = req.body.comment;
   console.log(data);
   Comment.findByIdAndUpdate(req.params.comment_id, data, (err, updatedComment)=>{
-    if(err || !comment){
+    if(err || !updatedComment){
       req.flash("error", "This site is experiencing maintenance. Be back soon!");
       res.redirect("back");
     } else{
@@ -108,4 +108,4 @@ router.delete('/:comment_id', middlewareObj.checkCommentOwnership, (req, res)=>{
   });
 });
 
-module.exports = router;
+module.exports = router; 

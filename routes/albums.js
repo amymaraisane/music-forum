@@ -64,11 +64,11 @@ router.get('/:id', (req, res)=>{
     //id comes from the url request
     //this is called a path parameter
     var albumID = req.params.id;
-    console.log(albumID);
     //ok to use without parsing because at this point it is still a string?
     Album.findById(albumID).populate("comments").exec((err, foundAlbum)=>{
-      if(err){
-        req.flash("error", "This site is experiencing maintenance. Be back soon!");
+      if(err || !foundAlbum){
+        req.flash("error", "Sorry, that album does not exist!");
+        return res.redirect('/music');
       } else{
         res.render('albums/show', {album: foundAlbum});
       }

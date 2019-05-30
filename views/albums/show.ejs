@@ -55,7 +55,7 @@
                         <div class="row" style="padding-top: 10px">
                             <div class="col-xs-12 col-sm-4">
                                     <form action="/music/<%= album._id%>/comments/<%=comment._id %>?_method=DELETE" method="POST">
-                                        <button class="btn btn-sm purpleBtn whiteText">Delete Comment</button>
+                                        <button class="btn btn-sm btn-danger whiteText">Delete Comment</button>
                                     </form>
                             </div>
                             <div class="col-xs-12 col-sm-4"></div>
@@ -73,9 +73,9 @@
 <% if(currentUser && album.author.id.equals(currentUser._id)){
     console.log(currentUser) %>
     <div style="float:right">
-        <a class="btn blueBtn" href="/music/<%= album._id %>/edit">Edit Post</a>
+        <a class="btn blueBtn" href="/music/<%= album._id %>/edit">Edit Album</a>
         <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
-            <button class="btn purpleBtn whiteText">Delete Post</button>
+            <button class="btn btn-sm btn-danger">Delete Album</button>
         </form>
     </div>
 <% } %>
