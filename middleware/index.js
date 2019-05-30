@@ -45,6 +45,7 @@ middlewareObj.checkCommentOwnership = (req, res, next)=>{
           req.flash("error", "Comment not found");
           res.redirect("/music");
         } else if(comment.author.id.equals(req.user._id) || req.user.isAdmin){
+            req.comment = comment;
             next();
           //ensure user created the album
           //once found, album is a mongoose object despite looking like a string when printed

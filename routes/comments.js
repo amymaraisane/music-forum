@@ -60,21 +60,7 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
 
 //Comments EDIT Route
 router.get('/:comment_id/edit', middlewareObj.isLoggedIn, middlewareObj.checkCommentOwnership, (req, res)=>{
-  Album.findById(req.params.id, (err, album)=>{
-    if (err || !album){
-      req.flash("error", "Album not found");
-      res.redirect("back");
-    } else{
-      Comment.findById(req.params.comment_id, (err, comment)=>{
-        if (err || !comment){
-          req.flash("error", "Comment not found");
-          res.redirect("back");
-        } else{
-          res.render('comments/edit', {album: album, comment: comment});
-        }
-      });
-    }
-  }); 
+  res.render('comments/edit', {album_id: req.params.id, comment: req.comment});
 });
 
 //Comments UPDATE route
