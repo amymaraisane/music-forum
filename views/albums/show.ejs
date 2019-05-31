@@ -10,13 +10,7 @@
                 <div class="artist">
                     <h3 style="margin: 0 auto">- <%= album.artist %> -</h3></span>
                 </div>
-                <img class="img-responsive" style="width:100%;
-                max-height: 600px;
-                overflow:hidden;
-                background-position:center center;
-                background-repeat:no-repeat;
-                background-size:cover" src="<%= album.image %>">
-
+                <img class="img-responsive" id="largeAlbum" src="<%= album.image %>">
                 <div class="caption-full">
                     <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
                     <p><em>Submitted By: <%=album.author.username%> on <%=album.created%></em></p>
