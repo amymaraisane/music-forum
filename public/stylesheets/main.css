@@ -52,7 +52,14 @@
 
 .smallInput {
     width: 40%;
-    margin: 0;
+}
+
+.left {
+    float: left;
+}
+
+section label, section input {
+    display: block;
 }
 
 .blueBtn {
