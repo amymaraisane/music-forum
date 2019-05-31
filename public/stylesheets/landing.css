@@ -28,8 +28,6 @@ body, html {
 /*static is the default position value. if you loose it it will not be able to do a z index
 If use Jumbotron class, to align in center of page can use padding-top: 40vh */   
 
-/*see ian's add on for styling the ul and lis correctly 
-to fade IN, images start with an opacity of 0 and fade in to 1*/
 
 .enterBtn {
     background-color: rgba(150,90,240, .8);
