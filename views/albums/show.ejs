@@ -5,21 +5,13 @@
 
 <div class="container">
     <div class="row">
-        <div style="background-color:rgba(2, 43, 88, 0.15); padding-top: 10px" class="col-md-3">
-            <p class="lead">Album Ranking</p>
-            <div class="list-group">
-                <li class="list-group-item">2017</li>
-                <li class="list-group-item">2018</li>
-                <li class="list-group-item active">2019</li>
-            </div>
-        </div>
-        <div class="col-md-9, text-center">
+        <div class="col-md-10, text-center">
             <div class="thumbnail imgShow">
                 <div class="artist">
                     <h3 style="margin: 0 auto">- <%= album.artist %> -</h3></span>
                 </div>
                 <img class="img-responsive" style="width:100%;
-                height:100%;
+                max-height: 600px;
                 overflow:hidden;
                 background-position:center center;
                 background-repeat:no-repeat;
@@ -29,7 +21,7 @@
                     <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
                     <p><em>Submitted By: <%=album.author.username%> on <%=album.created%></em></p>
                     <div class="row" style="margin: 0">
-                        <a class="btn purpleBtn col-xs-12 col-md-4" id="toAlbums" href="/music">Back to Albums</a> 
+                        <a class="btn purpleBtn col-xs-12 col-md-4" href="/music">Back to Albums</a> 
                         <span class="col-xs-12 col-md-4" style="text-align: center"></span>
                         <a class="btn blueBtn col-xs-12 col-md-4" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
                     </div>
@@ -37,7 +29,7 @@
             </div>
 
             <% album.comments.forEach(comment=>{ %>
-                <div class="well row" style="width: 50%; margin: 5px auto">
+                <div class="well row" style="width: 60%; margin: 5px auto">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <span class=pull-left><strong><%= comment.author.username%></strong></span>   

@@ -1,18 +1,24 @@
 <% include ../partials/header %>
+<div class="display: flex; pageTitle">
+        <h1 class="blue">Edit <%= album.name %></h1>
+</div>
+<a class="btn purpleBtn backBtn" href="/music">Back to Music Forum</a>
 
-<div class="container; display: block">
-    <div class="row">
-        <div style="width: 30%; margin: 0 auto"> 
-            <h3 style="text-align: center">Edit <i><strong><%= album.name %></strong></i></h3>
+<div class="container">
+    <div class="thumbnail newAlbum">
+        <div class="row">
             <form action="/music/<%=album._id %>?_method=PUT" method="POST">
-                <div class="form-group">
-                    <label for="album[name]">Album Name</label>
-                    <input class="form-control" type="text" name="album[name]" value=" <%= album.name %>">
-                </div>    
-                <div class="form-group">
-                    <label for="album[artist]">Artist</label>
-                    <input class="form-control" type="text" name="album[artist]" value=" <%= album.artist %>">
-                </div>  
+                <div class="row" style="display: flex">
+                    <div class="col-xs-12 col-md-6">
+                        <label for="album[name]">Album Name</label>
+                        <input class="form-control" type="text" name="album[name]" value=" <%= album.name %>">
+                    </div>    
+                    <div class="col-xs-12 col-md-6">
+                            <label for="album[artist]">Artist</label>
+                        <input class="form-control" type="text" name="album[artist]" value=" <%= album.artist %>">
+                    </div>  
+                </div>
+                <br>
                 <div class="form-group">
                     <label for="album[image]">Album Cover URL</label>
                     <input class="form-control" type="text" name="album[image]" value=" <%= album.image %>">
@@ -22,8 +28,7 @@
                     <textarea require= "true" class="form-control" name="album[about]" id="" cols="30" rows="10"> <%= album.about %></textarea>
                 </div>
                 <button class="btn btn-lg blueBtn btn-block">Update</button>
-            </form> <br>
-            <a class="btn purpleBtn whiteText" href="/music">Back to Music Forum</a>
+            </form> 
         </div>
     </div>
 </div>
