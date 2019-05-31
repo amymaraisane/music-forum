@@ -11,6 +11,15 @@
     padding: 6px;
 }
 
+.blue {
+    background-color: rgb(50,221,250);
+}
+
+.purple {
+    background-color: rgba(150,90,240, .8); 
+    color: rgb(250,250,250);
+}
+
 .login {
     width: 40%; 
     margin: 0 auto; 
@@ -23,21 +32,40 @@
     margin-bottom: 15px;
 }
 
+.addContentHeader {
+    margin-top: 0px; 
+}
+
+.newContent {
+    width: 40%; 
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid rgb(0,0,0);
+}
+
+.newAlbum {
+    width: 60%; 
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid rgb(0,0,0);
+}
+
+.blueBtn {
+    background-color:rgb(50,221,250); 
+    color: white;
+}
+
 .purpleBtn {
     background-color:rgba(150,90,240, .8); 
-    color: rgb(250,250,250,);
+    color: rgb(250,250,250);
 }
 
 .purpleBtn:hover {
     color: rgb(0,0,0) !important;
 }
 
-#toAlbums, .whiteText {
-    color: rgb(250,250,250);
-}
-.blueBtn {
-    background-color:rgb(50,221,250); 
-    color: white;
+.backBtn {
+    margin-left: 15px;
 }
 
 .fa-compact-disc {

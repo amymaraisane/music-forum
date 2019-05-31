@@ -1,12 +1,12 @@
 <% include ../partials/header %>
 <div>
-    <a href="/music" class="btn purpleBtn" id="toAlbums">Back to Albums</a>
+    <a href="/music" class="btn purpleBtn backBtn">Back to Albums</a>
 </div>
 
 
 <div class="container; display: block">
-    <div class="row">
-        <div style="width: 30%; margin: 0 auto"> 
+    <div class="thumbnail newAlbum">
+        <div class="row">
             <h3 style="text-align: center">Submit a New Album</h3>
             <form action="/music" method="POST">
                 <div class="form-group">
@@ -27,10 +27,10 @@
                 </div>
                 <button class="btn blueBtn">Submit</button>
             </form>
+            </div>
         </div>
     </div>
 </div>
 
 
-<br>
 <% include ../partials/footer %>
