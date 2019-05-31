@@ -23,11 +23,11 @@ middlewareObj.checkAlbumOwnership = (req, res, next)=>{
             //once found, album is a mongoose object despite looking like a string when printed
             //req.user._id is a string. need to use.equals method to check equality
             if(album.author.id.equals(req.user._id) || req.user.isAdmin){
-            req.album = album;
-            next();
+              req.album = album;
+              next();
             } else{
-            req.flash("error", "You don't have permission to do that");
-            res.redirect("/albums/" + req.params.albumID);
+              req.flash("error", "You don't have permission to do that");
+              res.redirect("/music/" + req.params.albumID);
             }
         }
         });  

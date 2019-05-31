@@ -25,7 +25,7 @@ router.post('/register', (req, res)=>{
       }
       //passport.authenticate runs the serializeUser() method and logs the user in
       //sign up, get credentials, register the app for fb/twitter
-      req.flash("success", "Welcome," + user.username + " !");
+      req.flash("success", "Welcome, " + user.username + " !");
       passport.authenticate('local')(req, res, ()=>{
         res.redirect('/music');
       });
@@ -40,7 +40,8 @@ router.get('/login', (req, res)=>{
 //handle login logic
 router.post('/login', passport.authenticate('local',{
   successRedirect: "/music",
-  failureRedirect: "/login"
+  failureRedirect: "/login",
+  failureFlash: true,
 }),(req, res)=>{
   //check if user is in dbr by passing passport.authenticalte('local) as part of the post req
   //woohoo!! its a middleware= anything that runs before the final route callback/handler

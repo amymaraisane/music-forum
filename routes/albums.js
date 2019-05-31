@@ -61,24 +61,24 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
 //Album SHOW route
 //because it will be /music/:id, very important that it comes after the predefined routes of same syntax
 router.get('/:id', (req, res)=>{
-    //id comes from the url request
-    //this is called a path parameter
-    var albumID = req.params.id;
-    //ok to use without parsing because at this point it is still a string?
-    Album.findById(albumID).populate("comments").exec((err, foundAlbum)=>{
-      if(err || !foundAlbum){
-        req.flash("error", "Sorry, that album does not exist!");
-        return res.redirect('/music');
-      }
-      res.render('albums/show', {album: foundAlbum});
-    });
-});
-
-//Album EDIT route
-router.get('/:id/edit', middlewareObj.isLoggedIn, middlewareObj.checkAlbumOwnership, (req, res)=>{
-  res.render('albums/edit', ({album: album})); 
+  //id comes from the url request
+  //this is called a path parameter
+  var albumID = req.params.id;
+  //ok to use without parsing because at this point it is still a string?
+  Album.findById(albumID).populate("comments").exec((err, foundAlbum)=>{
+    if(err || !foundAlbum){
+      req.flash("error", "Sorry, that album does not exist!");
+      return res.redirect('/music');
+    }
+    res.render('albums/show', {album: foundAlbum});
+  });
 });
   
+//Album EDIT route
+router.get('/:id/edit', middlewareObj.isLoggedIn, middlewareObj.checkAlbumOwnership, (req, res)=>{
+  res.render('albums/edit', ({album: req.album})); 
+});
+
 //Album UPDATE route
 router.put('/:id', middlewareObj.checkAlbumOwnership, (req, res)=>{
     var albumID = req.params.id;
@@ -89,7 +89,7 @@ router.put('/:id', middlewareObj.checkAlbumOwnership, (req, res)=>{
         req.flash("error", "Album not found");
         res.redirect('/');
       } else{
-        req.flash("success", album + " updated!");
+        req.flash("success", album.name + " updated!");
         res.redirect('/music/' + albumID);
       }
     });
