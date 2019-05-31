@@ -46,8 +46,13 @@
 .newAlbum {
     width: 60%; 
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
     border: 2px solid rgb(0,0,0);
+}
+
+.smallInput {
+    width: 40%;
+    margin: 0;
 }
 
 .blueBtn {
