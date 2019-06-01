@@ -4,7 +4,7 @@
 
 <div class="container; display: block" style="justify-content: center; text-align: center;">
     <div class="row">
-        <div style="width: 30%; margin: 0 auto; display: flex; flex-direction: column"> 
+        <div class="thumbnail newContent" style="width: 40%; margin: 0 auto; display: flex; flex-direction: column"> 
             <form action="/music/<%=album_id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
                 <h2>Edit Comment</h2> 
                 <input class="form-control" type="text" name="comment[text]" value="<%=comment.text%>">
