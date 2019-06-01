@@ -18,7 +18,7 @@
                     <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
                     <p><em>Submitted By: <%=album.author.username%> on <%=album.created%></em></p>
                     <div class="row" style="margin: 0">
-                        <a class="btn blueBtn" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
+                        <a class="btn blueBtn" style="display: block; text-align: center" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                         <div class="row" style="padding-top: 10px">
                             <div class="col-xs-12 col-sm-4">
                                     <form action="/music/<%= album._id%>/comments/<%=comment._id %>?_method=DELETE" method="POST">
-                                        <button class="btn btn-sm btn-danger whiteText">Delete Comment</button>
+                                        <button class="btn btn-sm btn-danger">Delete Comment</button>
                                     </form>
                             </div>
                             <div class="col-xs-12 col-sm-4"></div>

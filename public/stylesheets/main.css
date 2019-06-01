@@ -82,6 +82,10 @@ section label, section input {
     margin-left: 15px;
 }
 
+.btn-danger:hover {
+    color: rgb(0,0,0);
+}
+
 .fa-compact-disc {
     font-size: 2rem;
 }
