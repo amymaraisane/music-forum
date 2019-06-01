@@ -2,10 +2,25 @@
 <div class="display: flex; pageTitle">
     <h1><%= album.name %></h1>
 </div>
+<div>
+    <span class="pull-left"><a class="btn purpleBtn backBtn" href="/music">Back to Albums</a></span>  
+    <span class="pull-right" style="margin-right: 15px">
+        <% if(currentUser && album.author.id.equals(currentUser._id)){
+            console.log(currentUser) %>
+            <div style="float:right">
+                <a class="btn blueBtn" href="/music/<%= album._id %>/edit">Edit Album</a>
+                <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Delete Album</button>
+                </form>
+            </div>
+        <% } %>
+    </span>
+</div>
+
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10, text-center">
+        <div class="col-sm-10, text-center">
             <div class="thumbnail imgShow">
                 <div class="artist">
                     <h3 style="margin: 0 auto">- <%= album.artist %> -</h3></span>
@@ -15,13 +30,14 @@
                     <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
                     <p><em>Submitted By: <%=album.author.username%> on <%=album.created%></em></p>
                     <div class="row" style="margin: 0">
-                        <a class="btn purpleBtn col-xs-12 col-md-4" href="/music">Back to Albums</a> 
-                        <span class="col-xs-12 col-md-4" style="text-align: center"></span>
-                        <a class="btn blueBtn col-xs-12 col-md-4" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
+                        <a class="btn blueBtn" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
                     </div>
                 </div>
             </div>
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10, text-center">
             <% album.comments.forEach(comment=>{ %>
                 <div class="well row" style="width: 60%; margin: 5px auto">
                     <div class="row">
@@ -52,18 +68,11 @@
                      <% } %>     
                 </div>
             <% }) %>  
-        </div>   
+        </div>
+    </div>
+            
+        </div>  
     </div>
 </div>  
-
-<% if(currentUser && album.author.id.equals(currentUser._id)){
-    console.log(currentUser) %>
-    <div style="float:right">
-        <a class="btn blueBtn" href="/music/<%= album._id %>/edit">Edit Album</a>
-        <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
-            <button class="btn btn-sm btn-danger">Delete Album</button>
-        </form>
-    </div>
-<% } %>
 
 <% include ../partials/footer %>
