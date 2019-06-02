@@ -1,4 +1,11 @@
+body, html {
+    font-family: 'Nunito Sans', sans-serif;
+}
 
+.nav {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: bold;
+}
 .pageTitle {
     border-bottom: rgb(0,0,0) solid 2px;
     justify-content: center; 
@@ -8,6 +15,7 @@
 .pageTitle h1 {
     margin: 0 auto; 
     padding: 6px;
+    font-family: 'Laila', serif;
 }
 
 .purple {
@@ -34,7 +42,7 @@
 .newContent {
     padding: 30px;
     margin: 0 auto;
-    border: 2px solid rgb(0,0,0);
+    border: 2px solid rgba(0,0,0, .4);
 }
 
 .newAlbum {

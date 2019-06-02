@@ -5,6 +5,11 @@ body, html {
 
 * {
     box-sizing: border-box;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.navbar {
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 .container {
