@@ -10,7 +10,7 @@ var express =   require('express');
 router.get('/search', function(req, res) {
     //grabs query string from req the form get method made
     var singer = req.query.singer;
-    var url = 'https://itunes.apple.com/search?term=' + singer + '&entity=song';
+    var url = 'https://itunes.apple.com/search?term=' + singer + '&entity=album';
     request(url, (error, response, body)=>{
       if (!error && response.statusCode == 200){
         var results = JSON.parse(body).results;

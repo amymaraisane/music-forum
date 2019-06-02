@@ -2,13 +2,16 @@
 
 <div class="container">
     <div class="thumbnail" style="width: 60%; margin: auto">
-        <h1>Find Songs By Artist Name:</h1>
+        <h1>Find Albums By Artist Name:</h1>
         <form action="/music/search" method="GET">
             <input type="text" name="singer" id= "singer" placeholder="artist name">
             <button>Search</button>
         </form>
+        <% console.log(results); %>
         <%results.forEach((result) =>{ %>
-        <li><%= result.trackCensoredName %> </li>
+        <li style="list-style: none"><strong><%= result.collectionCensoredName %></strong></li>
+        <li style="list-style: none"> <img src="<%= result.artworkUrl100 %>" alt="album cover"></li>
+        <li style="list-style: none; text-indent: 15px">   <%= result.copyright %> </li>
         <% }); %>
     </div>
 </div>
