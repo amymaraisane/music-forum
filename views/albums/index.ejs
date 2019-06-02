@@ -1,10 +1,13 @@
 <% include ../partials/header %>
 
 <div class="display: flex; pageTitle">
-    <h1>Albums</h1>
+    <h1 style="font-size: 3em; font-weight: bold">Albums</h1>
 </div>
+
+<hr>
+
 <div class="display: flex; justify-content: text-center">
-    <a class= "btn blueBtn" href="/music/new"><i class="fas fa-plus"></i><strong> New</strong></a>
+    <a class= "btn blueBtn" style="margin-top: 10px" href="/music/new"><i class="fas fa-plus"></i><strong> New</strong></a>
 </div>
 
 
@@ -17,14 +20,14 @@
     </div>
     <div class="row">
         <% albums.forEach((album)=>{ %>
-            <div class="col-lg-4 col-sm-6 text-center" style="display:flex; flex-wrap:wrap">
-                <div class="thumbnail" style="width: 320px; background-color:rgba(2, 43, 88, 0.05); box-shadow: 2px 3px rgb(0, 0, 0, .3)">
-                    <a href="/music/<%= album._id %>"><img style="width: 300px; height: 300px; margin: 0 auto" src="<%= album.image %>"></a>
+            <div class="col-xs-12 col-sm-6 col-lg-4 text-center" style="display:flex; flex-wrap:wrap">
+                <div class="thumbnail" id="indexAlbum">
+                    <a href="/music/<%= album._id %>"><img style="width: 320px; height: 320px; margin: 0" src="<%= album.image %>"></a>
                     <div class="caption">
                         <h4> <%= album.name %> - <%= album.artist %> </h4> <br>
                         <p><%-album.about.substring(0, 50) %></p>    
                     </div>
-                    <a href="/music/<%= album._id %>" class="btn blueBtn">Forum</a>
+                    <a href="/music/<%= album._id %>" class="btn blueBtn" style="display: block">Forum</a>
                 </div>
             </div>
         <%}) %>
