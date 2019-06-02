@@ -38,13 +38,12 @@
 }
 
 .newAlbum {
-    width: 60%; 
     margin: 0 auto;
     padding-top: 10px;
     padding-right: 30px;
     padding-left: 30px;
     padding-bottom: 10px;
-    border: 2px solid rgb(0,0,0);
+    border: solid rgb(0, 0, 0, .4) 2px;
 }
 
 .smallInput {

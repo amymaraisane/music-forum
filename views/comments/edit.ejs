@@ -1,18 +1,20 @@
 <% include ../partials/header %>
 
-<div class="hidden-xs" style="display: flex; align-items: center">
-        <a class="btn purpleBtn" href="/music">Back to Albums</a>
-</div>
-
-<div class="container; display: block" style="justify-content: center; text-align: center;">
+<div class="container" style="justify-content: center; padding:0; text-align: center;">
     <div class="row">
-        <div class="thumbnail newContent" style="width: 40%; margin: 0 auto; display: flex; flex-direction: column"> 
-            <form action="/music/<%=album_id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
-                <h2>Edit Comment</h2> 
-                <input class="form-control" type="text" name="comment[text]" value="<%=comment.text%>">
-                <button class="btn blueBtn">Update</button>
-            </form>
+        <div class="hidden-xs col-sm-2" style="padding:0">
+            <a class="btn purpleBtn" style="float: left" href="/music">Back to Albums</a>
         </div>
+        <div class="col-xs-12 col-sm-8">
+            <div class="thumbnail newContent" style="margin: 0 auto; display: flex; flex-direction: column"> 
+                <form action="/music/<%=album_id%>/comments/<%=comment._id%>?_method=PUT" method="POST">
+                    <h2>Edit Comment</h2> 
+                    <input class="form-control" type="text" name="comment[text]" value="<%=comment.text%>">
+                    <button class="btn blueBtn">Update</button>
+                </form>
+            </div>
+        </div>
+        <div class=" hidden-xs col-sm-2"></div>
     </div>
 </div>
 

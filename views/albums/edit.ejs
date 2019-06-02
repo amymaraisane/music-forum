@@ -2,34 +2,42 @@
 <div class="display: flex; pageTitle">
         <h1 class="blue">Edit <%= album.name %></h1>
 </div>
-<a class="btn purpleBtn backBtn" href="/music">Back to Music Forum</a>
 
-<div class="container">
-    <div class="thumbnail newAlbum">
-        <div class="row">
-            <form action="/music/<%=album._id %>?_method=PUT" method="POST">
-                <div class="row" style="display: flex">
-                    <div class="col-xs-12 col-md-6">
-                        <label for="album[name]">Album Name</label>
-                        <input class="form-control" type="text" name="album[name]" value=" <%= album.name %>">
-                    </div>    
-                    <div class="col-xs-12 col-md-6">
-                            <label for="album[artist]">Artist</label>
-                        <input class="form-control" type="text" name="album[artist]" value=" <%= album.artist %>">
-                    </div>  
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="album[image]">Album Cover URL</label>
-                    <input class="form-control" type="text" name="album[image]" value=" <%= album.image %>">
-                </div>
-                <div class="form-group">
-                    <label for="album[about]">About</label>
-                    <textarea require= "true" class="form-control" name="album[about]" id="" cols="30" rows="10"> <%= album.about %></textarea>
-                </div>
-                <button class="btn btn-lg blueBtn btn-block">Update</button>
-            </form> 
+<div class="container" style="padding: 0">
+    <div class="row">
+        <div class="hidden-xs col-sm-2" style="padding:0">
+            <a class="btn purpleBtn" style="float: left" href="/music">Back to Albums</a>
         </div>
+        <div class="col-xs-12 col-sm-8">    
+            <div class="thumbnail newAlbum">
+                    <div class="row">
+                        <form action="/music/<%=album._id %>?_method=PUT" method="POST">
+                            <div class="row" style="display: flex">
+                                <div class="col-xs-12 col-md-6">
+                                    <label for="album[name]">Album Name</label>
+                                    <input class="form-control" type="text" name="album[name]" value=" <%= album.name %>">
+                                </div>    
+                                <div class="col-xs-12 col-md-6">
+                                        <label for="album[artist]">Artist</label>
+                                    <input class="form-control" type="text" name="album[artist]" value=" <%= album.artist %>">
+                                </div>  
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <label for="album[image]">Album Cover URL</label>
+                                <input class="form-control" type="text" name="album[image]" value=" <%= album.image %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="album[about]">About</label>
+                                <textarea require= "true" class="form-control" name="album[about]" id="" cols="30" rows="10"> <%= album.about %></textarea>
+                            </div>
+                            <button class="btn btn-lg blueBtn btn-block">Update</button>
+                        </form> 
+                    </div>
+                </div>    
+            </div>
+        </div>
+        <div class=" hidden-xs col-sm-2"></div>
     </div>
 </div>
 
