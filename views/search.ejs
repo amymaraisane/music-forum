@@ -1,13 +1,17 @@
 <% include ./partials/header %>
 
 <div class="container search">
-    <div style="text-align: center">
+    <div style="text-align: center; margin-bottom: 30px">
         <h1>Find Albums By Artist Name:</h1>
-        <form action="/music/search" method="GET">
-            <input type="text" name="singer" id= "singer" placeholder="artist name">
-            <button class="btn btn-sm blueBtn" style="margin-bottom: 15px">Search</button>
-        </form>
+        <hr>
+        <div class="row">
+            <form action="/music/search" method="GET">
+                <input type="text" class="searchAlbums" name="singer" id= "singer" placeholder="artist name">
+                <button class="btn blueBtn" style="margin-bottom: 1px">Search</button>
+            </form>
+        </div>
     </div>
+
     <div class="row">
         <% console.log(results); %>
         <%results.forEach((result) =>{ %>
@@ -16,7 +20,7 @@
                 <div class="container">
                     <div class="row" style="display: flex">
                         <img style="margin-left: 8px" src="<%= result.artworkUrl100 %>" alt="album cover">
-                        <div style="max-height: 70px; max-width: 400px">
+                        <div style="max-height: 70px; max-width: 350px">
                             <p style="margin: 10px; text-align: center; word-wrap: break-word"> <%= result.copyright %> </p>
                         </div> 
                     </div>
