@@ -1,5 +1,6 @@
 var express =       require('express'),
     app =           express(),
+    request =       require('request'),
     path =          require('path'),
     bodyParser =    require('body-parser'),
     methodOverride= require('method-override'),
