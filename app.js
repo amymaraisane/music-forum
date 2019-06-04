@@ -69,8 +69,7 @@ app.use((req, res, next)=>{
 app.use(indexRoutes);
 app.use("/music", albumRoutes);
 app.use("/music/:id/comments", commentRoutes);
-
-//runs seedDB right away to delete albums and create more  
+ 
 // seedDB();
 
 // User.create({
