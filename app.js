@@ -18,8 +18,8 @@ var express =       require('express'),
     Comment =       require("./models/comment");
 
     albumRoutes =   require('./routes/albums'),
-    commentRoutes =   require('./routes/comments'),
-    indexRoutes =   require('./routes/index'),
+    commentRoutes = require('./routes/comments'),
+    indexRoutes =   require('./routes/index');
 
 //  ./ references current directory
 
