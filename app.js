@@ -22,7 +22,6 @@ var express =       require('express'),
     indexRoutes =   require('./routes/index'),
 
 //  ./ references current directory
-    seedDB  =       require("./seeds");
 
 //user refers to the user for the cluster under Security tab
 mongoose.connect("mongodb://localhost/albums", {useNewUrlParser: true});
@@ -132,6 +131,8 @@ app.use("/music/:id/comments", commentRoutes);
 
 module.exports = app;
 
-app.listen(3000, ()=>{
-	console.log('server listening on port 3000');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
 });
