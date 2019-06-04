@@ -48,7 +48,6 @@ app.use(require('express-session')({
   secret: "Developmental Secret Session",
   resave: false,
   saveUninitialized: false
-  //these are just standard things we need to use with express session
 }));
 
 app.use(passport.initialize());
