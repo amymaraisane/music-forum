@@ -1,5 +1,6 @@
 var express =   require('express');
     router =    express.Router();
+    request =   require('request');
     Album =     require("../models/album");
     User =      require("../models/user");
     middlewareObj = require("../middleware");

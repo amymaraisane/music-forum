@@ -1,6 +1,7 @@
 var express =   require('express');
     router =    express.Router({mergeParams: true});
     Album =     require("../models/album");
+    request =   require('request');
     Comment =   require("../models/comment");
     User =      require("../models/user");
     middlewareObj = require("../middleware");
