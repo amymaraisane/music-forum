@@ -21,8 +21,6 @@ var express =       require('express'),
     commentRoutes = require('./routes/comments'),
     indexRoutes =   require('./routes/index');
 
-//  ./ references current directory
-
 //user refers to the user for the cluster under Security tab
 mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
 mongoose.set('useFindAndModify', false);
