@@ -22,7 +22,7 @@ var express =       require('express'),
     indexRoutes =   require('./routes/index');
 
 //user refers to the user for the cluster under Security tab
-mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
+mongoose.connect(process.env.DATABASEURL);
 mongoose.set('useFindAndModify', false);
 
 // moment().format("YYYY, hA");
