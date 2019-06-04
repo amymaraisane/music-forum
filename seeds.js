@@ -1,4 +1,4 @@
-var mongoose =  require('Mongoose');
+var mongoose =  require('mongoose');
     Album =     require('./models/album');
     Comment =   require('./models/comment');
 
