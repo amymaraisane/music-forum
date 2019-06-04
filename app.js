@@ -24,7 +24,7 @@ var express =       require('express'),
 //  ./ references current directory
 
 //user refers to the user for the cluster under Security tab
-mongoose.connect("mongodb://27017/albums", {useNewUrlParser: true});
+mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true});
 mongoose.set('useFindAndModify', false);
 
 // moment().format("YYYY, hA");
