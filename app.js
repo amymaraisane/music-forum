@@ -24,7 +24,6 @@ var express =       require('express'),
 //  ./ references current directory
     seedDB  =       require("./seeds");
 
-// 'mongodb+srv://user1:kiwi53@cluster0-enwgt.mongodb.net/test?retryWrites=true'
 //user refers to the user for the cluster under Security tab
 mongoose.connect("mongodb://localhost/albums", {useNewUrlParser: true});
 mongoose.set('useFindAndModify', false);
