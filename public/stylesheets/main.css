@@ -140,6 +140,7 @@ nav .searchAlbums {
 
 #indexAlbum {
     width: 320px; 
+    height: 460px;
     background-color:rgba(2, 43, 88, 0.05); 
     padding: 0;
 }
