@@ -22,7 +22,9 @@ var express =       require('express'),
     indexRoutes =   require('./routes/index');
 
 //user refers to the user for the cluster under Security tab
-mongoose.connect(process.env.DATABASEURL, {
+const url = process.env.DATABASEURL || "MONGODB://localhost/albums"
+
+mongoose.connect(url, {
   useNewUrlParser: true,
   useCreateIndex: true
 });
@@ -112,7 +114,6 @@ app.use("/music/:id/comments", commentRoutes);
 // });
 
 
-
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {
 //   next(createError(404));
@@ -133,6 +134,6 @@ module.exports = app;
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
+app.listen(PORT, process.env.IP, () => {
     console.log(`Our app is running on port ${ PORT }`);
 });
