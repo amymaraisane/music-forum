@@ -18,7 +18,7 @@
     </div>
     <div class="row">
         <% albums.forEach((album)=>{ %>
-            <div class="col-xs-12 col-sm-6 col-lg-4 text-center" style="display:flex; flex-wrap:wrap">
+            <div class="col-xs-12 col-sm-6 col-lg-4 text-center" style="display:flex; flex-wrap:wrap; justify-content: center">
                 <div class="thumbnail" id="indexAlbum">
                     <a href="/music/<%= album._id %>"><img style="width: 320px; height: 320px; margin: 0" src="<%= album.image %>"></a>
                     <div class="caption">
