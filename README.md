@@ -1,6 +1,6 @@
-###ITUNES NODE APP 
+### ITUNES NODE APP 
 
-##View live on Heroku here: https://vast-sierra-13998.herokuapp.com/ 
+## View live on Heroku here: https://vast-sierra-13998.herokuapp.com/ 
 
 ## Post about your favorite albums and comment on other posts. 
 Need inspiration? Search the itunes api for a list of albums by a specific artist. 
