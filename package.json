@@ -19,6 +19,7 @@
     "express-session": "^1.16.1",
     "http-errors": "~1.6.2",
     "jade": "^1.11.0",
+    "jasmine-node": "^3.0.0",
     "method-override": "^3.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.5.7",

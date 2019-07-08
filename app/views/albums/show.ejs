@@ -1,0 +1,77 @@
+<% include ../partials/header %>
+
+<div class="container" style="margin: 0; padding: 0; width: 100%">
+    <div class="row">
+        <div class="hidden-xs col-sm-2" style="display: flex; align-items: center">
+            <a class="btn purpleBtn" href="/music">Back to Albums</a>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <div class="thumbnail imgShow">
+                <div class="artist">
+                    <h1><%= album.name %></h1>
+                    <h3>- <%= album.artist %> -</h3>
+                </div>
+                <img class="img-responsive" id="largeAlbum" src="<%= album.image %>">
+                <div class="caption-full">
+                    <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
+                    <p><em>Submitted By: <%=album.author.username%> on <%=album.created%></em></p>
+                    <div class="row" style="margin: 0">
+                        <a class="btn blueBtn" style="display: block; text-align: center" href="/music/<%=album._id%>/comments/new">Add a Comment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <% if(currentUser && album.author.id.equals(currentUser._id)){
+                console.log(currentUser) %>
+                <div style="text-align: right">
+                    <a class="btn blueBtn" href="/music/<%= album._id %>/edit">Edit Album</a>
+                    <form action="/music/<%= album._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-sm btn-danger">Delete Album</button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <% album.comments.forEach(comment=>{ %>
+                <div class="well row" style="margin: 5px auto">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <span class=pull-left><strong><%= comment.author.username%></strong></span>   
+                        </div>  
+                        <div class="col-xs-12 col-sm-6">
+                            <span class="pull-right">Date here</span>
+                        </div> 
+                    </div>
+                    <div class="row">
+                        <div style="padding: 15px">
+                            <span class="pull-left"> <%= comment.text %></span>
+                        </div>
+                    </div>
+                    <% if (currentUser && comment.author.id.equals(currentUser._id)){ %>
+                        <div class="row" style="padding-top: 10px">
+                            <div class="col-xs-12 col-sm-4">
+                                <form action="/music/<%= album._id%>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-sm btn-danger">Delete Comment</button>
+                                </form>
+                            </div>
+                            <div class="col-xs-12 col-sm-4"></div>
+                            <div class="col-xs-12 col-sm-4">
+                                <a class="btn btn-sm blueBtn" style="float:right" href="/music/<%= album._id%>/comments/<%=comment._id %>/edit">Edit Comment</a>
+                            </div>
+                        </div>                           
+                     <% } %>     
+                </div>
+            <% }) %>  
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+            
+        </div>  
+    </div>
+</div>  
+
+<% include ../partials/footer %>
