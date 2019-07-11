@@ -9,27 +9,27 @@
             <div class="thumbnail newAlbum">
                     <h1 style="margin-top: 15px; text-align: center">Edit <%= album.name %></h1>
                     <div class="row">
-                        <form action="/music/<%=album._id %>?_method=PUT" method="POST">
+                        <form action="/music/<%=album._id %>?_method=PUT" aria-label="Edit album information" method="POST">
                             <div class="row" style="display: flex">
-                                <div class="col-xs-12 col-md-6">
+                                <div class="col-xs-12 col-md-6" aria-label="album name">
                                     <label for="album[name]">Album Name</label>
                                     <input class="form-control" type="text" name="album[name]" value=" <%= album.name %>">
                                 </div>    
-                                <div class="col-xs-12 col-md-6">
+                                <div class="col-xs-12 col-md-6" aria-label="artist name">
                                         <label for="album[artist]">Artist</label>
                                     <input class="form-control" type="text" name="album[artist]" value=" <%= album.artist %>">
                                 </div>  
                             </div>
                             <br>
-                            <div class="form-group">
+                            <div class="form-group" aria-label="album cover URL" >
                                 <label for="album[image]">Album Cover URL</label>
                                 <input class="form-control" type="text" name="album[image]" value=" <%= album.image %>">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" aria-label="album description">
                                 <label for="album[about]">About</label>
                                 <textarea require= "true" class="form-control" name="album[about]" id="" cols="30" rows="10"> <%= album.about %></textarea>
                             </div>
-                            <button class="btn btn-lg blueBtn btn-block">Update</button>
+                            <button aria-label="submit album updates"class="btn btn-lg blueBtn btn-block">Update</button>
                         </form> 
                     </div>
                 </div>    

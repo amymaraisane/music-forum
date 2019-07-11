@@ -5,14 +5,14 @@
         <div class="hidden-xs col-sm-2" style="display: flex; align-items: center">
             <a class="btn purpleBtn" href="/music">Back to Albums</a>
         </div>
-        <div class="col-xs-12 col-sm-8">
+        <div class="col-xs-12 col-sm-8" aria-label="selected album information">
             <div class="thumbnail imgShow">
-                <div class="artist">
+                <div class="artist" aria-label="artist name and album name">
                     <h1><%= album.name %></h1>
                     <h3>- <%= album.artist %> -</h3>
                 </div>
-                <img class="img-responsive" id="largeAlbum" src="<%= album.image %>">
-                <div class="caption-full">
+                <img class="img-responsive" id="largeAlbum" alt="album cover" src="<%= album.image %>">
+                <div class="caption-full" aria-label="album description">
                     <p style="padding: 10px 6px 2px"><strong>About: </strong><%= album.about %></p>
                     <p><em>Submitted By: <%=album.author.username%> on <%=album.created%></em></p>
                     <div class="row" style="margin: 0">
@@ -33,21 +33,21 @@
             <% } %>
         </div>
     </div>
-    <div class="row">
+    <div class="row" aria-label="list of all comments">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <% album.comments.forEach(comment=>{ %>
                 <div class="well row" style="margin: 5px auto">
                     <div class="row">
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-6" aria-label="comment author">
                             <span class=pull-left><strong><%= comment.author.username%></strong></span>   
                         </div>  
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-6" aria-label="date posted">
                             <span class="pull-right">Date here</span>
                         </div> 
                     </div>
                     <div class="row">
-                        <div style="padding: 15px">
+                        <div style="padding: 15px" aria-label="comment">
                             <span class="pull-left"> <%= comment.text %></span>
                         </div>
                     </div>

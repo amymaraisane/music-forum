@@ -6,7 +6,7 @@
 
 <hr>
 
-<div class="display: flex; justify-content: text-center">
+<div class="display: flex; justify-content: text-center" aria-label="add an album">
     <a class= "btn blueBtn" style="margin-top: 10px" href="/music/new"><i class="fas fa-plus"></i><strong> New</strong></a>
 </div>
 
@@ -19,13 +19,13 @@
     <div class="row">
         <% albums.forEach((album)=>{ %>
             <div class="col-xs-12 col-sm-6 col-lg-4 text-center" style="display:flex; flex-wrap:wrap; justify-content: center">
-                <div class="thumbnail" id="indexAlbum">
-                    <a href="/music/<%= album._id %>"><img style="width: 320px; height: 320px; margin: 0" src="<%= album.image %>"></a>
-                    <div class="caption">
+                <div class="thumbnail indexAlbum">
+                    <a href="/music/<%= album._id %>"><img style="width: 320px; height: 320px; margin: 0" alt="album-image" src="<%= album.image %>"></a>
+                    <div class="caption" aria-label="album name, artist, and about">
                         <h4> <%= album.name %> - <%= album.artist %> </h4> <br>
                         <p><%-album.about.substring(0, 35) %></p>    
                     </div>
-                    <a href="/music/<%= album._id %>" class="btn blueBtn" style="display: block">Forum</a>
+                    <a href="/music/<%= album._id %>" class="btn blueBtn" aria-label="enter forum for this album" style="display: block">Forum</a>
                 </div>
             </div>
         <%}) %>

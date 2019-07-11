@@ -68,18 +68,18 @@ body, html {
 }
 
 .slideshow li:nth-child(1) { 
-    background-image: url(/images/turntable.jpg) 
+    background-image: url(/images/turntable.jpeg) 
 }
 .slideshow li:nth-child(2) { 
-background-image: url(/images/concert.jpg);
+background-image: url(/images/concert.jpeg);
 animation-delay: 10s; 
 }
 .slideshow li:nth-child(3) { 
-background-image: url(/images/recordingMic.jpg);
+background-image: url(/images/recordingMic.jpeg);
 animation-delay: 20s; 
 }
 .slideshow li:nth-child(4) { 
-background-image: url(/images/blueTurntable.jpg);
+background-image: url(/images/blueTurntable.jpeg);
 animation-delay: 30s; 
 }
 

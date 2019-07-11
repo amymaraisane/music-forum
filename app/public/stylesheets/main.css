@@ -138,7 +138,7 @@ nav .searchAlbums {
     font-size: 2rem;
 }
 
-#indexAlbum {
+.indexAlbum {
     width: 320px; 
     height: 460px;
     background-color:rgba(2, 43, 88, 0.05); 
