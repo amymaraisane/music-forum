@@ -22,20 +22,18 @@ var express =       require('express'),
     indexRoutes =   require('./routes/index');
 
 //user refers to the user for the cluster under Security tab
-const url = process.env.DATABASEURL || "MONGODB://localhost/albums"
+const url = process.env.DATABASEURL || "mongodb://localhost/albums"
 
 mongoose.connect(url, {
   useNewUrlParser: true,
-  useCreateIndex: true
+  useCreateIndex: true 
 });
 
-mongoose.set('useFindAndModify', false);
-
-// moment().format("YYYY, hA");
-
+mongoose.set('useFindAndModify', false); 
+ 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs'); 
 
 
 app.use(bodyParser.urlencoded({ extended: true }));;

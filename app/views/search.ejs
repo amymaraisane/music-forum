@@ -7,7 +7,7 @@
         <div class="row">
             <form action="/music/search" method="GET">
                 <input type="text" class="searchAlbums" name="singer" id= "singer" placeholder="artist name">
-                <button class="btn blueBtn" style="margin-bottom: 1px">Search</button>
+                <button class="btn blueBtn" aria-label="Search by artist name" style="margin-bottom: 1px">Search</button>
             </form>
         </div>
     </div>
@@ -25,7 +25,7 @@
                         </div> 
                     </div>
                 </div>
-                <a class="btn blueBtnSearch" style="vertical-align: center" target="_blank" href="<%= result.collectionViewUrl %>">View on Itunes</a>
+                <a class="btn blueBtnSearch" style="vertical-align: center" aria-label="view artist's albums on iTunes" target="_blank" href="<%= result.collectionViewUrl %>">View on Itunes</a>
                 
             </div>
         <% }); %>

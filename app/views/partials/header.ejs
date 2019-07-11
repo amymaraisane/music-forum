@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+
     <!-- Bootstrap V. 3.4.1 compiled and minified CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
@@ -23,10 +25,10 @@
     <title>Music Lover Forum</title>
   </head>
   <body style="padding-top: 0px">
-  <nav class="navbar navbar-inverse" style="margin-bottom:0 !important">
+  <nav class="navbar navbar-inverse" role="navigation" style="margin-bottom:0 !important">
       <div class="container-fluid">
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-collapse-1" aria-label="Toggle Navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -39,7 +41,7 @@
                   <li><a href="/music">Album Gallery</a></li>
               </ul> 
               <ul class="nav navbar-nav navbar-right">
-                  <form class="navbar-form navbar-left" action="/music/search" method="GET" style="vertical-align: center; margin: 10px 0">
+                  <form class="navbar-form navbar-left" role="search" action="/music/search" method="GET" style="vertical-align: center; margin: 10px 0">
                       <div class="form-group">
                           <input type="text" class="searchAlbums" name="singer" id= "singer" placeholder="search by artist name">
                           <input type="submit" style="display: inline" value="Go" id="navGo">

@@ -34,9 +34,6 @@ body, html {
 .container p {
     font-size: 1.2em;
 }
-/*static is the default position value. if you loose it it will not be able to do a z index
-If use Jumbotron class, to align in center of page can use padding-top: 40vh */   
-
 
 .enterBtn {
     background-color:rgba(50,221,250, .8);
