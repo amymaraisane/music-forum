@@ -4,12 +4,9 @@ var express =   require('express');
     Album =     require("../models/album");
     User =      require("../models/user");
     middlewareObj = require("../middleware");
-    //index file will be available automatically when require the directory
-    //this is a special property of any file named index, it is used to import other files
 
 /* GET music listing from itunes API. */
 router.get('/search', function(req, res) {
-    //grabs query string from req the form get method made
     var singer = req.query.singer;
     var url = 'https://itunes.apple.com/search?term=' + singer + '&entity=album';
     request(url, (error, response, body)=>{
@@ -39,7 +36,6 @@ router.get('/new', middlewareObj.isLoggedIn, (req, res)=>{
 
 //Album CREATE route
 router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
-    //grab input from form req object in name
     let newAlbum = req.body.album;
     let author = {
       id: req.user._id,
@@ -47,7 +43,6 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
     }
     newAlbum.author = author;
     newAlbum.about = req.sanitize(newAlbum.about);
-    //create a new album and save to db
     Album.create(newAlbum, (err, album)=>{
         if (err){
         req.flash("error", "This site is experiencing maintenance. Be back soon!");
@@ -60,12 +55,8 @@ router.post('/', middlewareObj.isLoggedIn, (req, res)=>{
   
   
 //Album SHOW route
-//because it will be /music/:id, very important that it comes after the predefined routes of same syntax
 router.get('/:id', (req, res)=>{
-  //id comes from the url request
-  //this is called a path parameter
   var albumID = req.params.id;
-  //ok to use without parsing because at this point it is still a string?
   Album.findById(albumID).populate("comments").exec((err, foundAlbum)=>{
     if(err || !foundAlbum){
       req.flash("error", "Sorry, that album does not exist!");
@@ -100,7 +91,6 @@ router.put('/:id', middlewareObj.checkAlbumOwnership, (req, res)=>{
 router.delete('/:id', middlewareObj.checkAlbumOwnership, (req, res)=>{
   var albumID = req.params.id;
   Album.findByIdAndRemove(albumID, err=>{
-  //this time there is NO data to pass into the callback 
     if(err){
       req.flash("error", "You cannot delete this album");
     } else{

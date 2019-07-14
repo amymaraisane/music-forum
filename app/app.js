@@ -21,7 +21,6 @@ var express =       require('express'),
     commentRoutes = require('./routes/comments'),
     indexRoutes =   require('./routes/index');
 
-//user refers to the user for the cluster under Security tab
 const url = process.env.DATABASEURL || "mongodb://localhost/albums"
 
 mongoose.connect(url, {
@@ -31,7 +30,6 @@ mongoose.connect(url, {
 
 mongoose.set('useFindAndModify', false); 
  
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs'); 
 
@@ -41,7 +39,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());
-//custom middleware to pass user data in to each route
 app.use(flash());
 
 app.use(require('express-session')({
@@ -63,53 +60,11 @@ app.use((req, res, next)=>{
   res.locals.success = req.flash("success");
   next();
 });
-//custom middleware to pass user data in to each route
-//must go after passport is set up
-//sort of like creating a global variable, but the associated value can be different for each route
 
 app.use(indexRoutes);
 app.use("/music", albumRoutes);
 app.use("/music/:id/comments", commentRoutes);
- 
-// seedDB();
 
-// User.create({
-//   name: "Hai",
-//   password: "bfasdf@asdf"
-// }, (err, newUser)=>{
-//   if(err){
-//     console.log(err);
-//   }
-// });
-
-//easiest to create the user first, then create the album associated with the user but either way it can save to user correctly
-
-// Album.create({
-//   name: "Ladies of the Canyon", artist: "Joni Mitchell", image: "https://upload.wikimedia.org/wikipedia/en/0/00/Joni_Ladies.jpg", about: "'Circle Game' off of this album is a classic!"
-// }, (err, newAlbum)=>{
-//   if(err){
-//     console.log("new Album did not save correctly", err);
-//   } else{
-//     User.findOne({name: "Hai"}, (err, foundUser)=>{
-//       foundUser.albums.push(newAlbum);
-//       foundUser.save((err, data)=>{
-//         if (err){
-//           console.log(err);
-//         } else {
-//           console.log(data);
-//         }
-//       });
-//     });
-//   }
-// });
-
-// User.findOne({name: "Hai"}).populate("albums").exec((err, user)=>{
-//   if (err){
-//     console.log(err);
-//   } else {
-//     console.log(user.albums);
-//   }
-// });
 
 module.exports = app;
 

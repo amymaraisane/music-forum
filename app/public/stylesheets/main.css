@@ -47,7 +47,7 @@ hr {
 }
 
 .newContent {
-    padding: 30px;
+    padding: 30px; 
     margin: 0 auto;
     border: 2px solid rgba(0,0,0, .4);
 }
@@ -165,7 +165,6 @@ nav .searchAlbums {
 }
 
 .artist {
-    /* background-color: rgba(2, 43, 88, 0.15); */
     border-bottom: solid rgb(0, 0, 0, .4) 2px;
     height: 7em;
     display: flex;
