@@ -2,10 +2,10 @@
 
 <div class="container" style="margin: 0; padding: 0; width: 100%">
     <div class="row">
-        <div class="hidden-xs col-sm-2" style="display: flex; align-items: center">
+        <div class="hidden-xs col-sm-3" style="display: flex; align-items: center">
             <a class="btn purpleBtn" href="/music">Back to Albums</a>
         </div>
-        <div class="col-xs-12 col-sm-8" aria-label="selected album information">
+        <div class="col-xs-12 col-sm-6" aria-label="selected album information">
             <div class="thumbnail imgShow">
                 <div class="artist" aria-label="artist name and album name">
                     <h1><%= album.name %></h1>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <% if(currentUser && album.author.id.equals(currentUser._id)){
                 console.log(currentUser) %>
                 <div style="text-align: right">
@@ -34,8 +34,8 @@
         </div>
     </div>
     <div class="row" aria-label="list of all comments">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
             <% album.comments.forEach(comment=>{ %>
                 <div class="well row" style="margin: 5px auto">
                     <div class="row">
@@ -67,7 +67,7 @@
                 </div>
             <% }) %>  
         </div>
-        <div class="col-sm-2"></div>
+        <div class="col-sm-3"></div>
     </div>
             
         </div>  
