@@ -112,6 +112,12 @@ nav .searchAlbums {
     -webkit-border-radius:6px; 
 }
 
+@media (max-width: 580px){
+    #navGo {
+        opacity: .7
+    }
+}
+
 .purpleBtn {
     background-color:rgba(150,90,240, .8); 
     color: rgb(250,250,250);
